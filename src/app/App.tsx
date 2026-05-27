@@ -4,6 +4,7 @@ import { Microscope, Dna, Brain, Monitor, Users, Database, GraduationCap, FlaskC
 import * as Accordion from '@radix-ui/react-accordion';
 import { ChevronDown } from 'lucide-react';
 import logoSvg from '../imports/gemini-2.svg';
+import heroBg from '../assets/hero-bg.jpg';
 
 import {
   BrowserRouter,
@@ -83,7 +84,7 @@ function HomePage() {
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{
-            backgroundImage: `url('https://images.unsplash.com/photo-1760381792929-4e899bffc823?q=80&w=1080')`,
+            backgroundImage: `url(${heroBg})`,
           }}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-[#0A2F44]/90 to-[#0A2F44]/70" />
@@ -96,7 +97,7 @@ function HomePage() {
               className="w-24 h-24 md:w-32 md:h-32 lg:w-40 lg:h-40 brightness-0 invert"
             />
             <h1 className="text-3xl md:text-4xl lg:text-5xl text-white tracking-wide">
-              ПЕТЕРБУРГСКИЙ<br />МОРФОЛОГИЧЕСКИЙ<br />ФОРУМ
+              ПЕТЕРБУРГСКИЙ<br />МОРФОЛОГИЧЕСКИЙ<br />ФОРУМ ПМФ
             </h1>
           </div>
           <p className="text-lg md:text-xl text-white/90 mb-2 max-w-3xl mx-auto">

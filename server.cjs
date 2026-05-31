@@ -7,6 +7,7 @@ const PORT = 5000;
 
 app.use(cors());
 app.use(express.json());
+
 app.get('/', (req, res) => {
   res.send('Server is working');
 });
@@ -27,23 +28,16 @@ app.post('/register', (req, res) => {
   const { name, email, phone, comment } = req.body;
 
   db.run(
-    `
-      INSERT INTO registrations (name, email, phone, comment)
-      VALUES (?, ?, ?, ?)
-    `,
-    [name, email,phone, comment],
-    function(err) {
+    `INSERT INTO registrations (name, email, phone, comment)
+     VALUES (?, ?, ?, ?)`,
+    [name, email, phone, comment],
+    function (err) {
       if (err) {
         console.error(err);
-
-        return res.status(500).json({
-          error: 'Ошибка сервера',
-        });
+        return res.status(500).json({ error: 'Ошибка сервера' });
       }
 
-      res.json({
-        success: true,
-      });
+      res.json({ success: true });
     }
   );
 });
@@ -51,7 +45,6 @@ app.post('/register', (req, res) => {
 app.get('/api', (req, res) => {
   res.json({ status: 'ok' });
 });
-
 
 app.get('/registrations', (req, res) => {
   db.all('SELECT * FROM registrations', [], (err, rows) => {
@@ -62,7 +55,7 @@ app.get('/registrations', (req, res) => {
 
     res.json(rows);
   });
-}); 
+});
 
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);

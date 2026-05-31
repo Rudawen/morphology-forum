@@ -6,14 +6,19 @@ import { ChevronDown } from 'lucide-react';
 import logoSvg from '../imports/gemini-2.svg';
 import heroBg from '../assets/hero-bg.jpg';
 
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  Link,
-} from 'react-router-dom';
-
+import { Routes, Route, Link } from 'react-router-dom';
 import Register from './Register';
+
+export default function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/register" element={<Register />} />
+    </Routes>
+  );
+}
+
+
 function HomePage() {
   const forumDate = new Date('2026-10-02T09:00:00');
 
@@ -97,7 +102,7 @@ function HomePage() {
               className="w-24 h-24 md:w-32 md:h-32 lg:w-40 lg:h-40 brightness-0 invert"
             />
             <h1 className="text-3xl md:text-4xl lg:text-5xl text-white tracking-wide">
-              ПЕТЕРБУРГСКИЙ<br />МОРФОЛОГИЧЕСКИЙ<br />ФОРУМ ПМФ
+              ПЕТЕРБУРГСКИЙ<br />МОРФОЛОГИЧЕСКИЙ<br />ФОРУМ Ппппппп
             </h1>
           </div>
           <p className="text-lg md:text-xl text-white/90 mb-2 max-w-3xl mx-auto">
@@ -192,9 +197,12 @@ function HomePage() {
       {/* Registration Packages */}
       <section className="py-16 px-4 bg-white">
         <div className="max-w-6xl mx-auto text-center">
-          <button className="bg-[#D94F30] hover:bg-[#D94F30]/90 text-white text-xl px-16 py-5 rounded-lg transition-colors shadow-md">
-            Зарегистрироваться
-          </button>
+          <Link
+  to="/register"
+  className="bg-[#D94F30] hover:bg-[#D94F30]/90 text-white text-xl px-16 py-5 rounded-lg transition-colors shadow-md inline-block"
+>
+  Зарегистрироваться
+</Link>
         </div>
       </section>
 
@@ -372,15 +380,5 @@ function ContactItem({ icon: Icon, text }: { icon: any; text: string }) {
       </div>
       <span>{text}</span>
     </div>
-  );
-}
-export default function App() {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/register" element={<Register />} />
-      </Routes>
-    </BrowserRouter>
   );
 }

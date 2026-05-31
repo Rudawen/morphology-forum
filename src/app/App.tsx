@@ -60,8 +60,8 @@ function HomePage() {
     },
     {
       icon: FlaskConical,
-      title: 'Мастер-класс: «Артефакт vs патология»',
-      description: 'Практическое занятие с препаратами'
+      title: 'Гастроэнтерологи',
+      description: 'Междисциплинарный подходд к сложным случаям, биопсия ЖКТ, коллаборация с патоморфологом'
     }
   ];
 
@@ -76,7 +76,7 @@ function HomePage() {
 
   const faqItems = [
     { q: 'Где встречаемся?', a: 'В центре г.Санкт-Петербург' },
-    { q: 'Будет ли запись мероприятия?', a: 'Нет, только практика и живое общение' },
+    { q: 'Будет ли запись мероприятия?', a: 'Да, все будет на канале в Ютуб и Рутуб' },
     { q: 'Сколько стоит участие?', a: 'Бесплатно! *при регистрации до 1 октября 2026г.' },
     { q: 'Меня отпустят с работы?', a: 'Да, свяжитесь с нами для получения именного приглашения' },
    
@@ -102,11 +102,11 @@ function HomePage() {
               className="w-24 h-24 md:w-32 md:h-32 lg:w-40 lg:h-40 brightness-0 invert"
             />
             <h1 className="text-3xl md:text-4xl lg:text-5xl text-white tracking-wide">
-              ПЕТЕРБУРГСКИЙ<br />МОРФОЛОГИЧЕСКИЙ<br />ФОРУМ Ппппппп
+              ПЕТЕРБУРГСКИЙ<br />МОРФОЛОГИЧЕСКИЙ<br />ФОРУМ
             </h1>
           </div>
           <p className="text-lg md:text-xl text-white/90 mb-2 max-w-3xl mx-auto">
-            Для патологоанатомов, судмедэкспертов, онкологов, морфологов, гистологов, биологов и молекулярных генетиков
+            Междисциплинарная коллаборация с патологом
           </p>
           <p className="text-xl md:text-2xl text-white mb-2">2 октября 2026 года</p>
           <p className="text-lg text-white/90 mb-8">Очно в г.Санкт-Петербурге</p>
@@ -139,7 +139,7 @@ function HomePage() {
               Петербургский Морфологический Форум — это первое междисциплинарное мероприятие в Санкт-Петербурге, объединяющее патологоанатомов, судебно-медицинских экспертов, онкологов, морфологов, гистологов, биологов и молекулярных генетиков.
             </p>
             <p className="text-justify">
-              Основная цель — обсуждение сложных диагностических случаев, стандартизация морфологических заключений, внедрение новых молекулярно-генетических методов и цифровой патологии.
+              Основная цель — обсуждение актуалых вопросов онко-патологии, разбор интересных диагностических случаев, внедрение новых молекулярно-генетических методов и цифровой патологии.
             </p>
             <p className="text-justify">
               Мы создаём пространство, где говорят на одном языке ради главного — точного диагноза и эффективного лечения пациента.
@@ -187,7 +187,6 @@ function HomePage() {
           <div className="bg-white rounded-lg shadow-sm overflow-hidden">
             <div className="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-[#E2E8F0]">
               <DateItem icon={Calendar} title="Начало регистрации" date="25 мая 2026 года" />
-              <DateItem icon={Calendar} title="Окончание регистрации" date="1 октября 2026" />
               <DateItem icon={Calendar} title="Дата форума" date="2 октября 2026 года" highlight large />
             </div>
           </div>
@@ -206,28 +205,6 @@ function HomePage() {
         </div>
       </section>
 
-      {/* Abstract Submission */}
-      <section className="py-16 px-4 bg-[#F8F9FA]">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl md:text-4xl text-center mb-8 text-[#0A2F44]">Подать клинический случай или кейс</h2>
-          <div className="bg-white p-8 rounded-lg shadow-sm">
-            <p className="text-base mb-6 text-[#1A2A36]">
-              Приглашаем врачей и исследователей представить редкие морфологические наблюдения, сложные дифференциальные диагнозы или случаи из судебно-гистологической практики.
-            </p>
-            <div className="mb-6">
-              <h3 className="text-lg mb-3 text-[#0A2F44]">Требования:</h3>
-              <ul className="list-disc list-inside space-y-2 text-[#1A2A36]">
-                <li>Клинические данные без личной информации пациента</li>
-                <li>1–5 изображений (микро- макрофото)</li>
-                <li>Клинико-морфологическое заключение</li>
-              </ul>
-            </div>
-            <button className="bg-[#D94F30] hover:bg-[#D94F30]/90 text-white px-8 py-3 rounded-lg transition-colors">
-              Подать случай
-            </button>
-          </div>
-        </div>
-      </section>
 
       {/* Organizers */}
       <section className="py-16 px-4 bg-white">

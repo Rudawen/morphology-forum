@@ -283,7 +283,6 @@ function HomePage() {
                 <ContactItem icon={Mail} text="pmf-info@yandex.ru" />
                 <ContactItem icon={Phone} text="+7 (981) 861-91-91  - Павлинов Г.Б." />
                 <ContactItem icon={Phone} text="+7 (952) 266-51-99  - Короткова Т.В. " />
-                <ContactItem icon={MapPin} text="Telegram: @morpho_forum" />
               </div>
             </div>
           </div>

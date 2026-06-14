@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { supabase } from "../lib/supabase";
 
 export default function Register() {
   const [form, setForm] = useState({
@@ -36,7 +35,7 @@ export default function Register() {
 
     const values = Object.values(form);
 
-    if (values.some((v) => !v.trim())) {
+    if (values.some((v) => !String(v).trim())) {
       setMessage("Заполните все поля");
       return;
     }
@@ -48,17 +47,26 @@ export default function Register() {
 
     setLoading(true);
 
-    const { error } = await supabase
-      .from("registrations")
-      .insert([form]);
+    try {
+      const res = await fetch("/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form),
+      });
 
-    setLoading(false);
-
-    if (error) {
-      setMessage("Ошибка сохранения");
+      if (!res.ok) {
+        throw new Error("Request failed");
+      }
+    } catch (error) {
       console.error(error);
+      setMessage("Ошибка сохранения");
+      setLoading(false);
       return;
     }
+
+    setLoading(false);
 
     setMessage("Регистрация успешно отправлена");
 

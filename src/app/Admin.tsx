@@ -2,10 +2,15 @@ import { useEffect, useState } from "react";
 
 type User = {
   id: number;
-  name: string;
+  first_name: string;
+  last_name: string;
   email: string;
   phone: string;
-  comment: string;
+  organization: string;
+  position: string;
+  city: string;
+  specialty: string;
+  created_at: string;
 };
 
 export default function Admin() {
@@ -14,7 +19,7 @@ export default function Admin() {
 
   const loadData = async () => {
     try {
-      const res = await fetch("http://localhost:5000/registrations");
+      const res = await fetch("/registrations");
       const data = await res.json();
       setUsers(data);
     } catch (err) {
@@ -41,9 +46,14 @@ export default function Admin() {
               <tr className="border-b">
                 <th className="p-3">ID</th>
                 <th className="p-3">Имя</th>
+                <th className="p-3">Фамилия</th>
                 <th className="p-3">Email</th>
                 <th className="p-3">Телефон</th>
-                <th className="p-3">Комментарий</th>
+                <th className="p-3">Организация</th>
+                <th className="p-3">Должность</th>
+                <th className="p-3">Город</th>
+                <th className="p-3">Специальность</th>
+                <th className="p-3">Дата</th>
               </tr>
             </thead>
 
@@ -51,10 +61,15 @@ export default function Admin() {
               {users.map((u) => (
                 <tr key={u.id} className="border-b text-center">
                   <td className="p-3">{u.id}</td>
-                  <td className="p-3">{u.name}</td>
+                  <td className="p-3">{u.first_name}</td>
+                  <td className="p-3">{u.last_name}</td>
                   <td className="p-3">{u.email}</td>
                   <td className="p-3">{u.phone}</td>
-                  <td className="p-3">{u.comment}</td>
+                  <td className="p-3">{u.organization}</td>
+                  <td className="p-3">{u.position}</td>
+                  <td className="p-3">{u.city}</td>
+                  <td className="p-3">{u.specialty}</td>
+                  <td className="p-3">{u.created_at}</td>
                 </tr>
               ))}
             </tbody>

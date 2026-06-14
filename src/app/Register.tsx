@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function Register() {
   const [form, setForm] = useState({
@@ -83,8 +84,15 @@ export default function Register() {
   };
 
   return (
-    <div className="min-h-screen bg-white flex items-center justify-center p-6">
-      <div className="w-full max-w-2xl bg-white shadow-2xl rounded-3xl p-8">
+    <div className="min-h-screen bg-[#F8F9FA] flex items-center justify-center p-6">
+      <div className="w-full max-w-2xl bg-white shadow-xl rounded-2xl p-6 md:p-8">
+        <Link
+          to="/"
+          className="mb-6 inline-flex text-sm text-[#2B6C8F] hover:text-[#0A2F44]"
+        >
+          ← Назад на сайт
+        </Link>
+
         <h1 className="text-4xl font-bold mb-8 text-center">
           Регистрация участника
         </h1>

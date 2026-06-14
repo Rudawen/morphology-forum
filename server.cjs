@@ -1,17 +1,18 @@
 const express = require('express');
 const cors = require('cors');
+const crypto = require('crypto');
+const path = require('path');
 const sqlite3 = require('sqlite3').verbose();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'admin2026';
+const ADMIN_TOKEN = crypto.randomBytes(32).toString('hex');
+const COOKIE_NAME = 'pmf_admin';
 
 app.use(cors());
 app.use(express.json());
 app.use(express.static('dist'));
-
-app.get('/', (req, res) => {
-  res.send('Server is working');
-});
 
 const db = new sqlite3.Database('./database.db');
 
@@ -57,6 +58,28 @@ db.serialize(() => {
     }
   });
 });
+
+function parseCookies(req) {
+  return Object.fromEntries(
+    (req.headers.cookie || '')
+      .split(';')
+      .filter(Boolean)
+      .map((cookie) => {
+        const [name, ...rest] = cookie.trim().split('=');
+        return [name, decodeURIComponent(rest.join('='))];
+      })
+  );
+}
+
+function requireAdmin(req, res, next) {
+  const cookies = parseCookies(req);
+
+  if (cookies[COOKIE_NAME] !== ADMIN_TOKEN) {
+    return res.status(401).json({ error: 'Unauthorized' });
+  }
+
+  next();
+}
 
 app.post('/register', (req, res) => {
   const {
@@ -109,7 +132,31 @@ app.get('/api', (req, res) => {
   res.json({ status: 'ok' });
 });
 
-app.get('/registrations', (req, res) => {
+app.post('/admin/login', (req, res) => {
+  if (req.body.password !== ADMIN_PASSWORD) {
+    return res.status(401).json({ error: 'Неверный пароль' });
+  }
+
+  res.cookie(COOKIE_NAME, ADMIN_TOKEN, {
+    httpOnly: true,
+    sameSite: 'lax',
+    secure: process.env.NODE_ENV === 'production',
+    maxAge: 1000 * 60 * 60 * 8,
+  });
+
+  res.json({ success: true });
+});
+
+app.post('/admin/logout', (req, res) => {
+  res.clearCookie(COOKIE_NAME);
+  res.json({ success: true });
+});
+
+app.get('/admin/me', requireAdmin, (req, res) => {
+  res.json({ authenticated: true });
+});
+
+app.get('/registrations', requireAdmin, (req, res) => {
   db.all('SELECT * FROM registrations ORDER BY id DESC', [], (err, rows) => {
     if (err) {
       console.error(err);
@@ -118,6 +165,10 @@ app.get('/registrations', (req, res) => {
 
     res.json(rows);
   });
+});
+
+app.get(/.*/, (req, res) => {
+  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
 app.listen(PORT, () => {

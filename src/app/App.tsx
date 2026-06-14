@@ -1,19 +1,25 @@
+import { useState } from 'react';
 import { CountdownTimer } from './components/CountdownTimer';
 import { ProgramCard } from './components/ProgramCard';
-import { Microscope, Dna, Brain, Monitor, Users, Database, GraduationCap, FlaskConical, Calendar, Mail, Phone, MapPin } from 'lucide-react';
+import { Microscope, Dna, Brain, Monitor, Users, Database, GraduationCap, FlaskConical, Calendar, Mail, Phone, X } from 'lucide-react';
 import * as Accordion from '@radix-ui/react-accordion';
 import { ChevronDown } from 'lucide-react';
 import logoSvg from '../imports/gemini-2.svg';
+import logoMirus from '../imports/logo_mirus.png';
 import heroBg from '../assets/hero-bg.jpg';
+import invitationImage from './assets/invitation.jpg';
+import invitationThumb from './assets/invitation-thumb.jpg';
 
 import { Routes, Route, Link } from 'react-router-dom';
 import Register from './Register';
+import Admin from './Admin';
 
 export default function App() {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/register" element={<Register />} />
+      <Route path="/admin" element={<Admin />} />
     </Routes>
   );
 }
@@ -190,6 +196,7 @@ function HomePage() {
               <DateItem icon={Calendar} title="Дата форума" date="2 октября 2026 года" highlight large />
             </div>
           </div>
+          <InvitationPreview />
         </div>
       </section>
 
@@ -212,10 +219,22 @@ function HomePage() {
           <h2 className="text-3xl md:text-4xl text-center mb-12 text-[#0A2F44]">Организаторы и партнёры</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-            <div>
+            <div className="rounded-lg border border-[#E2E8F0] bg-[#F8F9FA] p-6">
               <h3 className="text-xl mb-4 text-[#0A2F44]">Организаторы:</h3>
+              <div className="flex items-center gap-4">
+                <img
+                  src={logoMirus}
+                  alt="МИРУС"
+                  className="h-20 w-auto object-contain"
+                  loading="lazy"
+                />
+                <div>
+                  <p className="text-lg text-[#0A2F44]">МИРУС</p>
+                  <p className="text-sm text-[#1A2A36]/70">Первый организатор форума</p>
+                </div>
+              </div>
             </div>
-            <div>
+            <div className="rounded-lg border border-[#E2E8F0] bg-[#F8F9FA] p-6">
               <h3 className="text-xl mb-4 text-[#0A2F44]">Научная поддержка:</h3>
             </div>
           </div>
@@ -312,6 +331,55 @@ function HomePage() {
   );
 }
 
+function InvitationPreview() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <div className="mt-10 text-center">
+        <button
+          type="button"
+          onClick={() => setOpen(true)}
+          className="inline-flex flex-col items-center rounded-lg border border-[#E2E8F0] bg-white p-3 shadow-sm transition hover:shadow-md"
+          aria-label="Открыть приглашение форума"
+        >
+          <img
+            src={invitationThumb}
+            alt="Приглашение на Петербургский морфологический форум"
+            className="w-full max-w-xs rounded-md"
+            loading="lazy"
+          />
+          <span className="mt-3 text-sm text-[#2B6C8F]">Нажмите, чтобы открыть приглашение</span>
+        </button>
+      </div>
+
+      {open && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-[#0A2F44]/90 p-4"
+          role="dialog"
+          aria-modal="true"
+          onClick={() => setOpen(false)}
+        >
+          <button
+            type="button"
+            onClick={() => setOpen(false)}
+            className="absolute right-4 top-4 rounded-full bg-white/95 p-3 text-[#0A2F44] shadow"
+            aria-label="Закрыть приглашение"
+          >
+            <X className="h-5 w-5" />
+          </button>
+          <img
+            src={invitationImage}
+            alt="Приглашение на Петербургский морфологический форум"
+            className="max-h-[90vh] max-w-[95vw] rounded-lg object-contain shadow-2xl"
+            onClick={(event) => event.stopPropagation()}
+          />
+        </div>
+      )}
+    </>
+  );
+}
+
 function DateItem({ icon: Icon, title, date, highlight = false, large = false }: { icon: any; title: string; date: string; highlight?: boolean; large?: boolean }) {
   return (
     <div className={`p-6 ${highlight ? 'bg-[#2B6C8F]/5' : ''}`}>
@@ -322,28 +390,6 @@ function DateItem({ icon: Icon, title, date, highlight = false, large = false }:
           <p className={`${large ? 'text-lg font-semibold text-[#D94F30]' : 'text-sm text-[#1A2A36]/70'}`}>{date}</p>
         </div>
       </div>
-    </div>
-  );
-}
-
-function PackageCard({ title, price, features, highlighted = false }: {
-  title: string;
-  price: string;
-  features: string[];
-  highlighted?: boolean
-}) {
-  return (
-    <div className={`p-8 rounded-lg ${highlighted ? 'bg-[#2B6C8F] text-white shadow-lg scale-105' : 'bg-white border border-[#E2E8F0]'}`}>
-      <h3 className={`text-xl mb-2 ${highlighted ? 'text-white' : 'text-[#0A2F44]'}`}>{title}</h3>
-      <div className={`text-3xl mb-6 ${highlighted ? 'text-white' : 'text-[#D94F30]'}`}>{price}</div>
-      <ul className="space-y-3">
-        {features.map((feature, i) => (
-          <li key={i} className={`flex items-start gap-2 text-sm ${highlighted ? 'text-white/90' : 'text-[#1A2A36]'}`}>
-            <span className="mt-1">✓</span>
-            <span>{feature}</span>
-          </li>
-        ))}
-      </ul>
     </div>
   );
 }

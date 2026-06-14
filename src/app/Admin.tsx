@@ -16,12 +16,21 @@ type User = {
 export default function Admin() {
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
+  const [authorized, setAuthorized] = useState(false);
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const loadData = async () => {
     try {
       const res = await fetch("/registrations");
+      if (res.status === 401) {
+        setAuthorized(false);
+        return;
+      }
+
       const data = await res.json();
       setUsers(data);
+      setAuthorized(true);
     } catch (err) {
       console.log(err);
     } finally {
@@ -33,9 +42,83 @@ export default function Admin() {
     loadData();
   }, []);
 
+  const handleLogin = async (event: React.FormEvent) => {
+    event.preventDefault();
+    setError("");
+    setLoading(true);
+
+    try {
+      const res = await fetch("/admin/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ password }),
+      });
+
+      if (!res.ok) {
+        setError("Неверный пароль");
+        setLoading(false);
+        return;
+      }
+
+      setPassword("");
+      await loadData();
+    } catch (err) {
+      console.log(err);
+      setError("Ошибка входа");
+      setLoading(false);
+    }
+  };
+
+  const handleLogout = async () => {
+    await fetch("/admin/logout", { method: "POST" });
+    setAuthorized(false);
+    setUsers([]);
+  };
+
+  if (!authorized && !loading) {
+    return (
+      <div className="min-h-screen bg-[#F8F9FA] flex items-center justify-center p-6">
+        <form
+          onSubmit={handleLogin}
+          className="w-full max-w-sm rounded-2xl bg-white p-8 shadow-xl"
+        >
+          <h1 className="mb-6 text-2xl font-bold text-[#0A2F44]">Вход в админку</h1>
+          <input
+            type="password"
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
+            placeholder="Пароль администратора"
+            className="mb-4 w-full rounded-xl border border-[#E2E8F0] p-4"
+          />
+          <button
+            type="submit"
+            className="w-full rounded-xl bg-[#0A2F44] p-4 text-white transition hover:bg-[#123f58]"
+          >
+            Войти
+          </button>
+          {error && <p className="mt-4 text-center text-sm text-[#D94F30]">{error}</p>}
+        </form>
+      </div>
+    );
+  }
+
   return (
-    <div className="min-h-screen bg-gray-100 p-10">
-      <h1 className="text-3xl font-bold mb-6">Админ-панель</h1>
+    <div className="min-h-screen bg-gray-100 p-6 md:p-10">
+      <div className="mb-6 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+        <div>
+          <h1 className="text-3xl font-bold">Админ-панель</h1>
+          <p className="text-sm text-gray-600">Заявок: {users.length}</p>
+        </div>
+        <button
+          type="button"
+          onClick={handleLogout}
+          className="rounded-lg bg-white px-4 py-2 text-sm shadow hover:bg-gray-50"
+        >
+          Выйти
+        </button>
+      </div>
 
       {loading ? (
         <p>Загрузка...</p>

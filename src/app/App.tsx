@@ -9,6 +9,9 @@ import logoMirus from '../imports/logo_mirus.png';
 import heroBg from '../assets/hero-bg.jpg';
 import invitationImage from './assets/invitation.jpg';
 import invitationThumb from './assets/invitation-thumb.jpg';
+import chirskyInvitation from './assets/chirsky-invitation.jpg';
+import chirskyInvitationThumb from './assets/chirsky-invitation-thumb.jpg';
+import chirskyInvitationPdf from './assets/chirsky-invitation.pdf';
 
 import { Routes, Route, Link } from 'react-router-dom';
 import Register from './Register';
@@ -236,6 +239,7 @@ function HomePage() {
             </div>
             <div className="rounded-lg border border-[#E2E8F0] bg-[#F8F9FA] p-6">
               <h3 className="text-xl mb-4 text-[#0A2F44]">Научная поддержка:</h3>
+              <ExpertInvitationPreview />
             </div>
           </div>
 
@@ -328,6 +332,71 @@ function HomePage() {
         </div>
       </footer>
     </div>
+  );
+}
+
+function ExpertInvitationPreview() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <button
+        type="button"
+        onClick={() => setOpen(true)}
+        className="flex w-full flex-col gap-4 rounded-lg border border-[#E2E8F0] bg-white p-3 text-left shadow-sm transition hover:shadow-md sm:flex-row sm:items-center"
+        aria-label="Открыть приглашение от Вадима Семёновича Чирского"
+      >
+        <img
+          src={chirskyInvitationThumb}
+          alt="Приглашение от Вадима Семёновича Чирского"
+          className="h-32 w-full rounded-md object-cover object-top sm:w-24"
+          loading="lazy"
+        />
+        <div>
+          <p className="text-base text-[#0A2F44]">
+            Приглашение от Вадима Семёновича Чирского
+          </p>
+          <p className="mt-2 text-sm text-[#1A2A36]/70">
+            Нажмите, чтобы открыть приглашение
+          </p>
+        </div>
+      </button>
+
+      {open && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-[#0A2F44]/90 p-4"
+          role="dialog"
+          aria-modal="true"
+          onClick={() => setOpen(false)}
+        >
+          <button
+            type="button"
+            onClick={() => setOpen(false)}
+            className="absolute right-4 top-4 rounded-full bg-white/95 p-3 text-[#0A2F44] shadow"
+            aria-label="Закрыть приглашение"
+          >
+            <X className="h-5 w-5" />
+          </button>
+          <div
+            className="flex max-h-[92vh] max-w-[95vw] flex-col items-center gap-3"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <img
+              src={chirskyInvitation}
+              alt="Приглашение от Вадима Семёновича Чирского"
+              className="max-h-[84vh] max-w-full rounded-lg object-contain shadow-2xl"
+            />
+            <a
+              href={chirskyInvitationPdf}
+              download
+              className="rounded-lg bg-white px-4 py-2 text-sm text-[#2B6C8F] shadow hover:text-[#0A2F44]"
+            >
+              Скачать PDF
+            </a>
+          </div>
+        </div>
+      )}
+    </>
   );
 }
 

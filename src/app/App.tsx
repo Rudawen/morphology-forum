@@ -91,7 +91,7 @@ function HomePage() {
   return (
     <div className="min-h-screen bg-[#F8F9FA]">
       {/* Hero Section */}
-      <section className="relative h-[600px] md:h-[700px] flex items-center justify-center text-center">
+      <section className="relative min-h-[620px] md:h-[700px] flex items-center justify-center text-center py-10">
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{
@@ -100,14 +100,14 @@ function HomePage() {
         />
         <div className="absolute inset-0 bg-gradient-to-b from-[#0A2F44]/90 to-[#0A2F44]/70" />
 
-        <div className="relative z-10 max-w-5xl mx-auto px-4">
-          <div className="flex items-center justify-center gap-6 mb-4">
+        <div className="relative z-10 w-full max-w-5xl mx-auto px-4">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6 mb-4">
             <img
               src={logoSvg}
               alt="Логотип"
-              className="w-24 h-24 md:w-32 md:h-32 lg:w-40 lg:h-40 brightness-0 invert"
+              className="w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 lg:w-40 lg:h-40 brightness-0 invert flex-shrink-0"
             />
-            <h1 className="text-3xl md:text-4xl lg:text-5xl text-white tracking-wide">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-white tracking-wide leading-tight">
               ПЕТЕРБУРГСКИЙ<br />МОРФОЛОГИЧЕСКИЙ<br />ФОРУМ
             </h1>
           </div>
@@ -124,7 +124,7 @@ function HomePage() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
   <Link
     to="/register"
-    className="bg-[#D94F30] hover:bg-[#D94F30]/90 text-white px-8 py-4 rounded-lg transition-colors"
+            className="w-full sm:w-auto bg-[#D94F30] hover:bg-[#D94F30]/90 text-white px-6 sm:px-8 py-4 rounded-lg transition-colors text-center"
   >
     Зарегистрироваться бесплатно
   </Link>
@@ -179,7 +179,7 @@ function HomePage() {
             {participants.map((participant, index) => (
               <div key={index} className="bg-[#F8F9FA] p-6 rounded-lg border-l-4 border-[#2B6C8F]">
                 <h3 className="text-lg mb-2 text-[#0A2F44]">{participant.title}</h3>
-                <p className="text-sm text-[#1A2A36]/70">— {participant.description}</p>
+              <p className="text-sm text-[#1A2A36]/70">{participant.description}</p>
               </div>
             ))}
           </div>
@@ -205,7 +205,7 @@ function HomePage() {
         <div className="max-w-6xl mx-auto text-center">
           <Link
   to="/register"
-  className="bg-[#D94F30] hover:bg-[#D94F30]/90 text-white text-xl px-16 py-5 rounded-lg transition-colors shadow-md inline-block"
+  className="w-full sm:w-auto bg-[#D94F30] hover:bg-[#D94F30]/90 text-white text-base sm:text-xl px-6 sm:px-16 py-5 rounded-lg transition-colors shadow-md inline-block text-center"
 >
   Зарегистрироваться
 </Link>
@@ -221,11 +221,11 @@ function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
             <div className="rounded-lg border border-[#E2E8F0] bg-[#F8F9FA] p-6">
               <h3 className="text-xl mb-4 text-[#0A2F44]">Организаторы:</h3>
-              <div className="flex items-center gap-4">
+              <div className="flex flex-col sm:flex-row sm:items-center gap-4">
                 <img
                   src={logoMirus}
                   alt="МИРУС"
-                  className="h-20 w-auto object-contain"
+                  className="h-20 w-auto max-w-full object-contain"
                   loading="lazy"
                 />
                 <div>
@@ -382,9 +382,9 @@ function InvitationPreview() {
 
 function DateItem({ icon: Icon, title, date, highlight = false, large = false }: { icon: any; title: string; date: string; highlight?: boolean; large?: boolean }) {
   return (
-    <div className={`p-6 ${highlight ? 'bg-[#2B6C8F]/5' : ''}`}>
+    <div className={`p-5 sm:p-6 ${highlight ? 'bg-[#2B6C8F]/5' : ''}`}>
       <div className="flex items-start gap-3">
-        <Icon className={`${large ? 'w-7 h-7' : 'w-5 h-5'} mt-1 ${highlight ? 'text-[#D94F30]' : 'text-[#2B6C8F]'}`} />
+        <Icon className={`${large ? 'w-7 h-7' : 'w-5 h-5'} mt-1 flex-shrink-0 ${highlight ? 'text-[#D94F30]' : 'text-[#2B6C8F]'}`} />
         <div>
           <h3 className={`${large ? 'text-xl' : 'text-base'} mb-1 text-[#0A2F44]`}>{title}</h3>
           <p className={`${large ? 'text-lg font-semibold text-[#D94F30]' : 'text-sm text-[#1A2A36]/70'}`}>{date}</p>
@@ -400,7 +400,7 @@ function ContactItem({ icon: Icon, text }: { icon: any; text: string }) {
       <div className="w-10 h-10 bg-[#2B6C8F]/10 rounded-lg flex items-center justify-center flex-shrink-0">
         <Icon className="w-5 h-5 text-[#2B6C8F]" />
       </div>
-      <span>{text}</span>
+      <span className="min-w-0">{text}</span>
     </div>
   );
 }

@@ -105,7 +105,7 @@ export default function Admin() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 p-6 md:p-10">
+    <div className="min-h-screen bg-gray-100 p-4 md:p-10">
       <div className="mb-6 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <div>
           <h1 className="text-3xl font-bold">Админ-панель</h1>
@@ -123,8 +123,8 @@ export default function Admin() {
       {loading ? (
         <p>Загрузка...</p>
       ) : (
-        <div className="overflow-x-auto">
-          <table className="w-full bg-white shadow rounded-xl">
+        <div className="w-full overflow-x-auto rounded-xl shadow">
+          <table className="min-w-[980px] w-full bg-white">
             <thead>
               <tr className="border-b">
                 <th className="p-3">ID</th>

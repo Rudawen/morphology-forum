@@ -34,7 +34,7 @@ export function CountdownTimer({ targetDate }: { targetDate: Date }) {
   }, [targetDate]);
 
   return (
-    <div className="flex gap-4 justify-center">
+    <div className="flex flex-wrap gap-2 sm:gap-4 justify-center">
       <TimeUnit value={timeLeft.days} label="дней" />
       <TimeUnit value={timeLeft.hours} label="часов" />
       <TimeUnit value={timeLeft.minutes} label="минут" />
@@ -45,8 +45,8 @@ export function CountdownTimer({ targetDate }: { targetDate: Date }) {
 
 function TimeUnit({ value, label }: { value: number; label: string }) {
   return (
-    <div className="flex flex-col items-center bg-white/20 backdrop-blur-sm px-4 py-3 rounded-lg min-w-[80px]">
-      <div className="text-3xl font-bold text-white">{value.toString().padStart(2, '0')}</div>
+    <div className="flex flex-col items-center bg-white/20 backdrop-blur-sm px-3 sm:px-4 py-3 rounded-lg min-w-[66px] sm:min-w-[80px]">
+      <div className="text-2xl sm:text-3xl font-bold text-white">{value.toString().padStart(2, '0')}</div>
       <div className="text-sm text-white/90">{label}</div>
     </div>
   );

@@ -128,6 +128,44 @@
     @apply bg-background text-foreground;
   }
 
+  html,
+  body,
+  #root {
+    width: 100%;
+    min-width: 0;
+    overflow-x: hidden;
+  }
+
+  *,
+  *::before,
+  *::after {
+    min-width: 0;
+    box-sizing: border-box;
+  }
+
+  img,
+  svg,
+  iframe,
+  video {
+    max-width: 100%;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  p,
+  span,
+  a,
+  button,
+  input,
+  th,
+  td {
+    overflow-wrap: anywhere;
+    word-break: normal;
+    hyphens: auto;
+  }
+
   /**
   * Default typography styles for HTML elements (h1-h4, p, label, button, input).
   * These are in @layer base, so Tailwind utility classes (like text-sm, text-lg) automatically override them.
@@ -177,5 +215,20 @@
     font-size: var(--text-base);
     font-weight: var(--font-weight-normal);
     line-height: 1.5;
+  }
+
+  @media (max-width: 480px) {
+    h1 {
+      line-height: 1.25;
+    }
+
+    h2,
+    h3 {
+      line-height: 1.3;
+    }
+
+    p {
+      text-align: left;
+    }
   }
 }

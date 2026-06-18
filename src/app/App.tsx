@@ -6,7 +6,10 @@ import * as Accordion from '@radix-ui/react-accordion';
 import { ChevronDown } from 'lucide-react';
 import logoSvg from '../imports/gemini-2.svg';
 import logoMirus from '../imports/logo_mirus.png';
+import logoAstrazeneca from '../imports/logo_astrazeneca.png';
+import logoKfbio from '../imports/logo_kfbio.png';
 import heroBg from '../assets/hero-bg.jpg';
+import whoParticipateBg from '../assets/who-participate-microscope.png';
 import invitationImage from './assets/invitation.jpg';
 import invitationThumb from './assets/invitation-thumb.jpg';
 import chirskyInvitation from './assets/chirsky-invitation.jpg';
@@ -81,6 +84,27 @@ function HomePage() {
     { title: 'Молекулярным генетикам', description: 'интеграция геномики в рутинную морфологию' },
     { title: 'Биологам и исследователям', description: 'представить свои данные, найти коллаборации' },
     { title: 'Ординаторам и студентам', description: 'бесплатная регистрация, практическая часть с клиническими случаями' }
+  ];
+
+  const organizers = [
+    {
+      logo: logoMirus,
+      name: 'МИРУС',
+      description: 'Первый организатор форума',
+      logoClassName: 'h-20'
+    },
+    {
+      logo: logoAstrazeneca,
+      name: 'Астразенека',
+      description: 'Партнёр форума',
+      logoClassName: 'h-14'
+    },
+    {
+      logo: logoKfbio,
+      name: 'КФБИО',
+      description: 'Партнёр форума',
+      logoClassName: 'h-14'
+    }
   ];
 
   const faqItems = [
@@ -175,12 +199,20 @@ function HomePage() {
       </section>
 
       {/* Who Should Participate */}
-      <section className="py-16 px-4 bg-white">
-        <div className="max-w-4xl mx-auto">
+      <section className="relative overflow-hidden py-16 px-4 bg-white">
+        <img
+          src={whoParticipateBg}
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-y-0 left-0 z-0 h-full w-full object-cover object-left opacity-45"
+          loading="lazy"
+        />
+        <div className="absolute inset-0 z-0 bg-white/60" />
+        <div className="relative z-10 max-w-4xl mx-auto">
           <h2 className="text-3xl md:text-4xl text-center mb-12 text-[#0A2F44]">Кому участвовать?</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {participants.map((participant, index) => (
-              <div key={index} className="bg-[#F8F9FA] p-6 rounded-lg border-l-4 border-[#2B6C8F]">
+              <div key={index} className="bg-[#F8F9FA]/95 backdrop-blur-sm p-6 rounded-lg border-l-4 border-[#2B6C8F] shadow-sm">
                 <h3 className="text-lg mb-2 text-[#0A2F44]">{participant.title}</h3>
               <p className="text-sm text-[#1A2A36]/70">{participant.description}</p>
               </div>
@@ -224,18 +256,22 @@ function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
             <div className="rounded-lg border border-[#E2E8F0] bg-[#F8F9FA] p-6">
               <h3 className="text-xl mb-4 text-[#0A2F44]">Организаторы:</h3>
-              <div className="flex flex-col sm:flex-row sm:items-center gap-4">
-                <img
-                  src={logoMirus}
-                  alt="МИРУС"
-                  className="h-20 w-auto max-w-full object-contain"
-                  loading="lazy"
-                />
-                <div>
-                  <p className="text-lg text-[#0A2F44]">МИРУС</p>
-                  <p className="text-sm text-[#1A2A36]/70">Первый организатор форума</p>
+              <div className="space-y-5">
+                {organizers.map((organizer) => (
+                  <div key={organizer.name} className="flex flex-col sm:flex-row sm:items-center gap-4">
+                    <img
+                      src={organizer.logo}
+                      alt={organizer.name}
+                      className={`${organizer.logoClassName} w-auto max-w-full object-contain`}
+                      loading="lazy"
+                    />
+                    <div>
+                      <p className="text-lg text-[#0A2F44]">{organizer.name}</p>
+                      <p className="text-sm text-[#1A2A36]/70">{organizer.description}</p>
+                    </div>
+                  </div>
+                ))}
                 </div>
-              </div>
             </div>
             <div className="rounded-lg border border-[#E2E8F0] bg-[#F8F9FA] p-6">
               <h3 className="text-xl mb-4 text-[#0A2F44]">Научная поддержка:</h3>

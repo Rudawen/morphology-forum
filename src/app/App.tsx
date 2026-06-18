@@ -10,7 +10,7 @@ import logoAstrazeneca from '../imports/logo_astrazeneca.png';
 import logoKfbio from '../imports/logo_kfbio.png';
 import heroBg from '../assets/hero-bg.jpg';
 import whoParticipateBg from '../assets/who-participate-microscope.png';
-import spbLandmarksBg from '../assets/spb-landmarks-map.svg';
+import spbLandmarksBg from '../assets/spb-landmarks.png';
 import invitationImage from './assets/invitation.jpg';
 import invitationThumb from './assets/invitation-thumb.jpg';
 import chirskyInvitation from './assets/chirsky-invitation.jpg';
@@ -315,10 +315,10 @@ function HomePage() {
           src={spbLandmarksBg}
           alt=""
           aria-hidden="true"
-          className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-full w-full object-cover object-center opacity-100"
+          className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-full w-full object-cover object-bottom opacity-45"
           loading="lazy"
         />
-        <div className="absolute inset-0 z-0 bg-white/82" />
+        <div className="absolute inset-0 z-0 bg-white/78" />
         <div className="relative z-10 max-w-6xl mx-auto">
           <h2 className="text-3xl md:text-4xl text-center mb-12 text-[#0A2A3A]">Контакты и место проведения</h2>
 

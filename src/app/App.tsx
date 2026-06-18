@@ -91,20 +91,17 @@ function HomePage() {
     {
       logo: logoMirus,
       name: 'МИРУС',
-      description: 'Первый организатор форума',
-      logoClassName: 'h-20'
+      description: 'Первый организатор форума'
     },
     {
       logo: logoAstrazeneca,
       name: 'Астразенека',
-      description: 'Партнёр форума',
-      logoClassName: 'h-14'
+      description: 'Партнёр форума'
     },
     {
       logo: logoKfbio,
       name: 'КФБИО',
-      description: 'Партнёр форума',
-      logoClassName: 'h-14'
+      description: 'Партнёр форума'
     }
   ];
 
@@ -133,7 +130,7 @@ function HomePage() {
             <img
               src={logoSvg}
               alt="Логотип"
-              className="w-44 h-44 sm:w-52 sm:h-52 md:w-64 md:h-64 object-contain flex-shrink-0 smoky-gold-logo"
+              className="w-36 h-36 sm:w-[10.5rem] sm:h-[10.5rem] md:w-52 md:h-52 object-contain flex-shrink-0 smoky-gold-logo"
             />
             <h1 className="text-left text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-white tracking-wide leading-tight">
               <span className="text-[#B8A16A]">П</span>ЕТЕРБУРГСКИЙ<br />
@@ -261,14 +258,16 @@ function HomePage() {
               <h3 className="text-xl mb-4 text-[#0A2A3A]">Организаторы:</h3>
               <div className="space-y-5">
                 {organizers.map((organizer) => (
-                  <div key={organizer.name} className="flex flex-col sm:flex-row sm:items-center gap-4">
-                    <img
-                      src={organizer.logo}
-                      alt={organizer.name}
-                      className={`${organizer.logoClassName} w-auto max-w-full object-contain`}
-                      loading="lazy"
-                    />
-                    <div>
+                  <div key={organizer.name} className="flex flex-col sm:flex-row sm:items-center gap-4 text-left">
+                    <div className="flex h-16 w-40 shrink-0 items-center justify-start">
+                      <img
+                        src={organizer.logo}
+                        alt={organizer.name}
+                        className="max-h-full max-w-full object-contain object-left"
+                        loading="lazy"
+                      />
+                    </div>
+                    <div className="text-left">
                       <p className="text-lg text-[#0A2A3A]">{organizer.name}</p>
                       <p className="text-sm text-[#1A2A36]/70">{organizer.description}</p>
                     </div>
@@ -315,10 +314,10 @@ function HomePage() {
           src={spbLandmarksBg}
           alt=""
           aria-hidden="true"
-          className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-full w-full object-cover object-bottom opacity-45"
+          className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-full w-full object-cover object-center opacity-55"
           loading="lazy"
         />
-        <div className="absolute inset-0 z-0 bg-white/78" />
+        <div className="absolute inset-0 z-0 bg-white/64" />
         <div className="relative z-10 max-w-6xl mx-auto">
           <h2 className="text-3xl md:text-4xl text-center mb-12 text-[#0A2A3A]">Контакты и место проведения</h2>
 

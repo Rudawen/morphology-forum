@@ -97,12 +97,12 @@ export default function Register() {
       <div className="w-full max-w-2xl bg-white shadow-xl rounded-2xl p-5 md:p-8">
         <Link
           to="/"
-          className="mb-6 inline-flex text-sm text-[#2B6C8F] hover:text-[#0A2F44]"
+          className="mb-6 inline-flex text-sm text-[#B8A16A] hover:text-[#0A2A3A]"
         >
           ← Назад на сайт
         </Link>
 
-        <h1 className="text-2xl md:text-4xl font-bold mb-8 text-center text-[#0A2F44]">
+        <h1 className="text-2xl md:text-4xl font-bold mb-8 text-center text-[#0A2A3A]">
           Регистрация участника
         </h1>
 
@@ -182,11 +182,11 @@ export default function Register() {
             </p>
 
             <details className="mt-3">
-              <summary className="cursor-pointer text-[#2B6C8F] hover:text-[#0A2F44]">
+              <summary className="cursor-pointer text-[#B8A16A] hover:text-[#0A2A3A]">
                 Ознакомиться с соглашением
               </summary>
               <div className="mt-4 max-h-72 overflow-y-auto rounded-lg bg-white p-4 text-left text-xs leading-relaxed text-[#1A2A36]/80">
-                <h2 className="mb-3 text-base font-semibold text-[#0A2F44]">
+                <h2 className="mb-3 text-base font-semibold text-[#0A2A3A]">
                   Согласие на обработку персональных данных
                 </h2>
                 <div className="space-y-3">
@@ -197,7 +197,7 @@ export default function Register() {
                 <a
                   href={consentDocument}
                   download
-                  className="mt-4 inline-flex text-[#2B6C8F] hover:text-[#0A2F44] hover:underline"
+                  className="mt-4 inline-flex text-[#B8A16A] hover:text-[#0A2A3A] hover:underline"
                 >
                   Скачать соглашение в DOCX
                 </a>
@@ -208,7 +208,7 @@ export default function Register() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-black text-white p-4 rounded-xl"
+            className="w-full bg-[#B8A16A] text-[#0A2A3A] p-4 rounded-xl transition hover:bg-[#A8925E]"
           >
             {loading
               ? "Отправка..."

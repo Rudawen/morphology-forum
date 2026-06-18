@@ -84,7 +84,7 @@ export default function Admin() {
           onSubmit={handleLogin}
           className="w-full max-w-sm rounded-2xl bg-white p-8 shadow-xl"
         >
-          <h1 className="mb-6 text-2xl font-bold text-[#0A2F44]">Вход в админку</h1>
+          <h1 className="mb-6 text-2xl font-bold text-[#0A2A3A]">Вход в админку</h1>
           <input
             type="password"
             value={password}
@@ -94,11 +94,11 @@ export default function Admin() {
           />
           <button
             type="submit"
-            className="w-full rounded-xl bg-[#0A2F44] p-4 text-white transition hover:bg-[#123f58]"
+            className="w-full rounded-xl bg-[#0A2A3A] p-4 text-white transition hover:bg-[#15384A]"
           >
             Войти
           </button>
-          {error && <p className="mt-4 text-center text-sm text-[#D94F30]">{error}</p>}
+          {error && <p className="mt-4 text-center text-sm text-[#B8A16A]">{error}</p>}
         </form>
       </div>
     );

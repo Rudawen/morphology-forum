@@ -4,12 +4,13 @@ import { ProgramCard } from './components/ProgramCard';
 import { Microscope, Dna, Brain, Monitor, Users, Database, GraduationCap, FlaskConical, Calendar, Mail, Phone, X } from 'lucide-react';
 import * as Accordion from '@radix-ui/react-accordion';
 import { ChevronDown } from 'lucide-react';
-import logoSvg from '../imports/gemini-2.svg';
+import logoSvg from '../assets/forum-logo.png';
 import logoMirus from '../imports/logo_mirus.png';
 import logoAstrazeneca from '../imports/logo_astrazeneca.png';
 import logoKfbio from '../imports/logo_kfbio.png';
 import heroBg from '../assets/hero-bg.jpg';
 import whoParticipateBg from '../assets/who-participate-microscope.png';
+import spbLandmarksBg from '../assets/spb-landmarks-map.svg';
 import invitationImage from './assets/invitation.jpg';
 import invitationThumb from './assets/invitation-thumb.jpg';
 import chirskyInvitation from './assets/chirsky-invitation.jpg';
@@ -118,31 +119,33 @@ function HomePage() {
   return (
     <div className="min-h-screen bg-[#F8F9FA]">
       {/* Hero Section */}
-      <section className="relative min-h-[620px] md:h-[700px] flex items-center justify-center text-center py-10">
+      <section className="relative min-h-[620px] md:h-[700px] flex items-center justify-center py-10">
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{
             backgroundImage: `url(${heroBg})`,
           }}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0A2F44]/90 to-[#0A2F44]/70" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0A2A3A]/92 to-[#0A2A3A]/76" />
 
         <div className="relative z-10 w-full max-w-5xl mx-auto px-4">
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6 mb-4">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-5 sm:gap-8 mb-5">
             <img
               src={logoSvg}
               alt="Логотип"
-              className="w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 lg:w-40 lg:h-40 brightness-0 invert flex-shrink-0"
+              className="w-44 h-44 sm:w-52 sm:h-52 md:w-64 md:h-64 object-contain flex-shrink-0 smoky-gold-logo"
             />
-            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-white tracking-wide leading-tight">
-              ПЕТЕРБУРГСКИЙ<br />МОРФОЛОГИЧЕСКИЙ<br />ФОРУМ
+            <h1 className="text-left text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-white tracking-wide leading-tight">
+              <span className="text-[#B8A16A]">П</span>ЕТЕРБУРГСКИЙ<br />
+              <span className="text-[#B8A16A]">М</span>ОРФОЛОГИЧЕСКИЙ<br />
+              <span className="text-[#B8A16A]">Ф</span>ОРУМ
             </h1>
           </div>
-          <p className="text-lg md:text-xl text-white/90 mb-2 max-w-3xl mx-auto">
+          <p className="text-center text-lg md:text-xl text-white/90 mb-2 max-w-3xl mx-auto">
             Междисциплинарная коллаборация с патологом
           </p>
-          <p className="text-xl md:text-2xl text-white mb-2">2 октября 2026 года</p>
-          <p className="text-lg text-white/90 mb-8">Очно в г.Санкт-Петербурге</p>
+          <p className="text-center text-xl md:text-2xl text-white mb-2">2 октября 2026 года</p>
+          <p className="text-center text-lg text-white/90 mb-8">Очно в г.Санкт-Петербурге</p>
 
           <div className="mb-8">
             <CountdownTimer targetDate={forumDate} />
@@ -151,13 +154,13 @@ function HomePage() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
   <Link
     to="/register"
-            className="w-full sm:w-auto bg-[#D94F30] hover:bg-[#D94F30]/90 text-white px-6 sm:px-8 py-4 rounded-lg transition-colors text-center"
+            className="w-full sm:w-auto bg-[#B8A16A] hover:bg-[#A8925E] text-[#0A2A3A] px-6 sm:px-8 py-4 rounded-lg transition-colors text-center shadow-md"
   >
     Зарегистрироваться бесплатно
   </Link>
 </div>
 
-          <p className="text-xs text-white/80 max-w-2xl mx-auto">
+          <p className="text-center text-xs text-white/80 max-w-2xl mx-auto">
             Сайт предназначен для медицинских работников и исследователей. Нажимая «Продолжить», вы подтверждаете, что являетесь специалистом в области патологической анатомии, судебной медицины, онкологии, морфологии, гистологии, биологии или молекулярной генетики.
           </p>
         </div>
@@ -166,7 +169,7 @@ function HomePage() {
       {/* About Section */}
       <section className="py-16 px-4 bg-white">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl md:text-4xl text-center mb-8 text-[#0A2F44]">О форуме</h2>
+          <h2 className="text-3xl md:text-4xl text-center mb-8 text-[#0A2A3A]">О форуме</h2>
           <div className="text-base md:text-lg text-[#1A2A36] leading-relaxed space-y-4">
             <p className="text-justify">
               Петербургский Морфологический Форум — это первое междисциплинарное мероприятие в Санкт-Петербурге, объединяющее патологоанатомов, судебно-медицинских экспертов, онкологов, морфологов, гистологов, биологов и молекулярных генетиков.
@@ -184,7 +187,7 @@ function HomePage() {
       {/* Scientific Program */}
       <section className="py-16 px-4 bg-[#F8F9FA]">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl md:text-4xl text-center mb-12 text-[#0A2F44]">Научная программа</h2>
+          <h2 className="text-3xl md:text-4xl text-center mb-12 text-[#0A2A3A]">Научная программа</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {programs.map((program, index) => (
               <ProgramCard
@@ -209,11 +212,11 @@ function HomePage() {
         />
         <div className="absolute inset-0 z-0 bg-white/60" />
         <div className="relative z-10 max-w-4xl mx-auto">
-          <h2 className="text-3xl md:text-4xl text-center mb-12 text-[#0A2F44]">Кому участвовать?</h2>
+          <h2 className="text-3xl md:text-4xl text-center mb-12 text-[#0A2A3A]">Кому участвовать?</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {participants.map((participant, index) => (
-              <div key={index} className="bg-[#F8F9FA]/95 backdrop-blur-sm p-6 rounded-lg border-l-4 border-[#2B6C8F] shadow-sm">
-                <h3 className="text-lg mb-2 text-[#0A2F44]">{participant.title}</h3>
+              <div key={index} className="bg-[#F8F9FA]/95 backdrop-blur-sm p-6 rounded-lg border-l-4 border-[#B8A16A] shadow-sm">
+                <h3 className="text-lg mb-2 text-[#0A2A3A]">{participant.title}</h3>
               <p className="text-sm text-[#1A2A36]/70">{participant.description}</p>
               </div>
             ))}
@@ -224,7 +227,7 @@ function HomePage() {
       {/* Key Dates */}
       <section className="py-16 px-4 bg-[#F8F9FA]">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl md:text-4xl text-center mb-12 text-[#0A2F44]">Важные даты</h2>
+          <h2 className="text-3xl md:text-4xl text-center mb-12 text-[#0A2A3A]">Важные даты</h2>
           <div className="bg-white rounded-lg shadow-sm overflow-hidden">
             <div className="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-[#E2E8F0]">
               <DateItem icon={Calendar} title="Начало регистрации" date="25 мая 2026 года" />
@@ -240,7 +243,7 @@ function HomePage() {
         <div className="max-w-6xl mx-auto text-center">
           <Link
   to="/register"
-  className="w-full sm:w-auto bg-[#D94F30] hover:bg-[#D94F30]/90 text-white text-base sm:text-xl px-6 sm:px-16 py-5 rounded-lg transition-colors shadow-md inline-block text-center"
+  className="w-full sm:w-auto bg-[#B8A16A] hover:bg-[#A8925E] text-[#0A2A3A] text-base sm:text-xl px-6 sm:px-16 py-5 rounded-lg transition-colors shadow-md inline-block text-center"
 >
   Зарегистрироваться
 </Link>
@@ -251,11 +254,11 @@ function HomePage() {
       {/* Organizers */}
       <section className="py-16 px-4 bg-white">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl md:text-4xl text-center mb-12 text-[#0A2F44]">Организаторы и партнёры</h2>
+          <h2 className="text-3xl md:text-4xl text-center mb-12 text-[#0A2A3A]">Организаторы и партнёры</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
             <div className="rounded-lg border border-[#E2E8F0] bg-[#F8F9FA] p-6">
-              <h3 className="text-xl mb-4 text-[#0A2F44]">Организаторы:</h3>
+              <h3 className="text-xl mb-4 text-[#0A2A3A]">Организаторы:</h3>
               <div className="space-y-5">
                 {organizers.map((organizer) => (
                   <div key={organizer.name} className="flex flex-col sm:flex-row sm:items-center gap-4">
@@ -266,7 +269,7 @@ function HomePage() {
                       loading="lazy"
                     />
                     <div>
-                      <p className="text-lg text-[#0A2F44]">{organizer.name}</p>
+                      <p className="text-lg text-[#0A2A3A]">{organizer.name}</p>
                       <p className="text-sm text-[#1A2A36]/70">{organizer.description}</p>
                     </div>
                   </div>
@@ -274,7 +277,7 @@ function HomePage() {
                 </div>
             </div>
             <div className="rounded-lg border border-[#E2E8F0] bg-[#F8F9FA] p-6">
-              <h3 className="text-xl mb-4 text-[#0A2F44]">Научная поддержка:</h3>
+              <h3 className="text-xl mb-4 text-[#0A2A3A]">Научная поддержка:</h3>
               <ExpertInvitationPreview />
             </div>
           </div>
@@ -285,7 +288,7 @@ function HomePage() {
       {/* FAQ */}
       <section className="py-16 px-4 bg-[#F8F9FA]">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl md:text-4xl text-center mb-12 text-[#0A2F44]">Вопрос-ответ</h2>
+          <h2 className="text-3xl md:text-4xl text-center mb-12 text-[#0A2A3A]">Вопрос-ответ</h2>
           <Accordion.Root type="single" collapsible className="space-y-4">
             {faqItems.map((item, index) => (
               <Accordion.Item
@@ -294,8 +297,8 @@ function HomePage() {
                 className="bg-white rounded-lg shadow-sm overflow-hidden border border-[#E2E8F0]"
               >
                 <Accordion.Trigger className="w-full px-6 py-4 flex items-center justify-between text-left hover:bg-[#F8F9FA] transition-colors group">
-                  <span className="text-base text-[#0A2F44]">{item.q}</span>
-                  <ChevronDown className="w-5 h-5 text-[#2B6C8F] transition-transform group-data-[state=open]:rotate-180" />
+                  <span className="text-base text-[#0A2A3A]">{item.q}</span>
+                  <ChevronDown className="w-5 h-5 text-[#B8A16A] transition-transform group-data-[state=open]:rotate-180" />
                 </Accordion.Trigger>
                 <Accordion.Content className="px-6 pb-4 text-[#1A2A36]/80">
                   {item.a}
@@ -307,13 +310,21 @@ function HomePage() {
       </section>
 
       {/* Contact & Venue */}
-      <section className="py-16 px-4 bg-white">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl md:text-4xl text-center mb-12 text-[#0A2F44]">Контакты и место проведения</h2>
+      <section className="relative overflow-hidden py-16 px-4 bg-white">
+        <img
+          src={spbLandmarksBg}
+          alt=""
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-full w-full object-cover object-center opacity-100"
+          loading="lazy"
+        />
+        <div className="absolute inset-0 z-0 bg-white/82" />
+        <div className="relative z-10 max-w-6xl mx-auto">
+          <h2 className="text-3xl md:text-4xl text-center mb-12 text-[#0A2A3A]">Контакты и место проведения</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-            <div>
-              <h3 className="text-xl mb-4 text-[#0A2F44]">Место проведения:</h3>
+            <div className="rounded-lg bg-white/88 p-5 shadow-sm backdrop-blur-sm">
+              <h3 className="text-xl mb-4 text-[#0A2A3A]">Место проведения:</h3>
               <div className="space-y-2 text-[#1A2A36] mb-6">
                 <p>Отель «Ренартисс Исаакий Санкт-Петербург 5* »</p>
                 <p>190121, Россия, Санкт-Петербург, Почтамтская, 4</p>
@@ -336,8 +347,8 @@ function HomePage() {
               </p>
             </div>
 
-            <div>
-              <h3 className="text-xl mb-4 text-[#0A2F44]">Контакты:</h3>
+            <div className="rounded-lg bg-white/88 p-5 shadow-sm backdrop-blur-sm">
+              <h3 className="text-xl mb-4 text-[#0A2A3A]">Контакты:</h3>
               <div className="space-y-4">
                 <ContactItem icon={Mail} text="pmf-info@yandex.ru" />
                 <ContactItem icon={Phone} text="+7 (981) 861-91-91  - Павлинов Г.Б." />
@@ -349,13 +360,13 @@ function HomePage() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-[#0A2F44] text-white py-8 px-4">
+      <footer className="bg-[#0A2A3A] text-white py-8 px-4">
         <div className="max-w-6xl mx-auto text-center text-sm">
           <div className="flex justify-center mb-4">
             <img
               src={logoSvg}
               alt="Логотип"
-              className="w-16 h-16 opacity-80 brightness-0 invert"
+              className="w-20 h-20 opacity-90 smoky-gold-logo"
             />
           </div>
           <p className="mb-2">18+. Для медицинских специалистов.</p>
@@ -389,7 +400,7 @@ function ExpertInvitationPreview() {
           loading="lazy"
         />
         <div>
-          <p className="text-base text-[#0A2F44]">
+          <p className="text-base text-[#0A2A3A]">
             Приглашение от Вадима Семёновича Чирского
           </p>
           <p className="mt-2 text-sm text-[#1A2A36]/70">
@@ -400,7 +411,7 @@ function ExpertInvitationPreview() {
 
       {open && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-[#0A2F44]/90 p-4"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-[#0A2A3A]/90 p-4"
           role="dialog"
           aria-modal="true"
           onClick={() => setOpen(false)}
@@ -408,7 +419,7 @@ function ExpertInvitationPreview() {
           <button
             type="button"
             onClick={() => setOpen(false)}
-            className="absolute right-4 top-4 rounded-full bg-white/95 p-3 text-[#0A2F44] shadow"
+            className="absolute right-4 top-4 rounded-full bg-white/95 p-3 text-[#0A2A3A] shadow"
             aria-label="Закрыть приглашение"
           >
             <X className="h-5 w-5" />
@@ -425,7 +436,7 @@ function ExpertInvitationPreview() {
             <a
               href={chirskyInvitationPdf}
               download
-              className="rounded-lg bg-white px-4 py-2 text-sm text-[#2B6C8F] shadow hover:text-[#0A2F44]"
+              className="rounded-lg bg-white px-4 py-2 text-sm text-[#B8A16A] shadow hover:text-[#0A2A3A]"
             >
               Скачать PDF
             </a>
@@ -454,13 +465,13 @@ function InvitationPreview() {
             className="w-full max-w-xs rounded-md"
             loading="lazy"
           />
-          <span className="mt-3 text-sm text-[#2B6C8F]">Нажмите, чтобы открыть приглашение</span>
+          <span className="mt-3 text-sm text-[#B8A16A]">Нажмите, чтобы открыть приглашение</span>
         </button>
       </div>
 
       {open && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-[#0A2F44]/90 p-4"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-[#0A2A3A]/90 p-4"
           role="dialog"
           aria-modal="true"
           onClick={() => setOpen(false)}
@@ -468,7 +479,7 @@ function InvitationPreview() {
           <button
             type="button"
             onClick={() => setOpen(false)}
-            className="absolute right-4 top-4 rounded-full bg-white/95 p-3 text-[#0A2F44] shadow"
+            className="absolute right-4 top-4 rounded-full bg-white/95 p-3 text-[#0A2A3A] shadow"
             aria-label="Закрыть приглашение"
           >
             <X className="h-5 w-5" />
@@ -487,12 +498,12 @@ function InvitationPreview() {
 
 function DateItem({ icon: Icon, title, date, highlight = false, large = false }: { icon: any; title: string; date: string; highlight?: boolean; large?: boolean }) {
   return (
-    <div className={`p-5 sm:p-6 ${highlight ? 'bg-[#2B6C8F]/5' : ''}`}>
+    <div className={`p-5 sm:p-6 ${highlight ? 'bg-[#B8A16A]/12' : ''}`}>
       <div className="flex items-start gap-3">
-        <Icon className={`${large ? 'w-7 h-7' : 'w-5 h-5'} mt-1 flex-shrink-0 ${highlight ? 'text-[#D94F30]' : 'text-[#2B6C8F]'}`} />
+        <Icon className={`${large ? 'w-7 h-7' : 'w-5 h-5'} mt-1 flex-shrink-0 ${highlight ? 'text-[#B8A16A]' : 'text-[#B8A16A]'}`} />
         <div>
-          <h3 className={`${large ? 'text-xl' : 'text-base'} mb-1 text-[#0A2F44]`}>{title}</h3>
-          <p className={`${large ? 'text-lg font-semibold text-[#D94F30]' : 'text-sm text-[#1A2A36]/70'}`}>{date}</p>
+          <h3 className={`${large ? 'text-xl' : 'text-base'} mb-1 text-[#0A2A3A]`}>{title}</h3>
+          <p className={`${large ? 'text-lg font-semibold text-[#B8A16A]' : 'text-sm text-[#1A2A36]/70'}`}>{date}</p>
         </div>
       </div>
     </div>
@@ -502,8 +513,8 @@ function DateItem({ icon: Icon, title, date, highlight = false, large = false }:
 function ContactItem({ icon: Icon, text }: { icon: any; text: string }) {
   return (
     <div className="flex items-center gap-3 text-[#1A2A36]">
-      <div className="w-10 h-10 bg-[#2B6C8F]/10 rounded-lg flex items-center justify-center flex-shrink-0">
-        <Icon className="w-5 h-5 text-[#2B6C8F]" />
+      <div className="w-10 h-10 bg-[#B8A16A]/10 rounded-lg flex items-center justify-center flex-shrink-0">
+        <Icon className="w-5 h-5 text-[#B8A16A]" />
       </div>
       <span className="min-w-0">{text}</span>
     </div>

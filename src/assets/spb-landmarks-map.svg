@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-label="Схема достопримечательностей Санкт-Петербурга">
+  <rect width="1200" height="720" fill="none"/>
+  <g fill="none" stroke="#b8a16a" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" opacity=".34">
+    <path d="M60 458c126-74 214-74 350-18 110 46 200 50 318 4 118-46 235-46 412 28"/>
+    <path d="M80 548c146-62 264-56 392 4 128 58 247 48 373-8 112-50 193-45 287 4"/>
+    <path d="M90 645h1020"/>
+  </g>
+  <g fill="none" stroke="#0a2a3a" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" opacity=".17">
+    <path d="M190 438h178"/>
+    <path d="M230 438V310h98v128"/>
+    <path d="M254 310v-72h50v72"/>
+    <path d="M238 238h82"/>
+    <path d="M694 438h226"/>
+    <path d="M736 438V300h142v138"/>
+    <path d="M716 300h184"/>
+    <path d="M760 300v-48h94v48"/>
+    <path d="M608 438V230"/>
+    <path d="M560 438h96"/>
+    <path d="M578 230h60"/>
+    <path d="M590 205h36"/>
+    <path d="M608 205v-58"/>
+    <path d="M586 147h44"/>
+    <path d="M455 438V278"/>
+    <path d="M405 438h100"/>
+    <path d="M422 278h66"/>
+    <path d="M455 278v-52"/>
+    <path d="M430 226h50"/>
+    <path d="M975 438V245"/>
+    <path d="M930 438h90"/>
+    <path d="M955 245h40"/>
+    <path d="M975 245v-56"/>
+    <path d="M948 189h54"/>
+    <path d="M526 556c52-32 106-32 160 0"/>
+    <path d="M548 602c42-22 82-22 122 0"/>
+  </g>
+  <g fill="#0a2a3a" opacity=".13">
+    <circle cx="250" cy="215" r="10"/>
+    <circle cx="455" cy="204" r="10"/>
+    <circle cx="608" cy="126" r="10"/>
+    <circle cx="807" cy="230" r="10"/>
+    <circle cx="975" cy="168" r="10"/>
+  </g>
+</svg>

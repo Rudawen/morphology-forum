@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, type ReactNode } from 'react';
 import { CountdownTimer } from './components/CountdownTimer';
 import { ProgramCard } from './components/ProgramCard';
 import { Microscope, Dna, Brain, Monitor, Users, Database, GraduationCap, FlaskConical, Calendar, Mail, Phone, X } from 'lucide-react';
@@ -90,7 +90,7 @@ function HomePage() {
   const organizers = [
     {
       logo: logoMirus,
-      name: 'МИРУС',
+      name: 'МИРУС МЕДИКАЛ',
       description: 'Первый организатор форума'
     },
     {
@@ -350,8 +350,16 @@ function HomePage() {
               <h3 className="text-xl mb-4 text-[#0A2A3A]">Контакты:</h3>
               <div className="space-y-4">
                 <ContactItem icon={Mail} text="pmf-info@yandex.ru" />
-                <ContactItem icon={Phone} text="+7 (981) 861-91-91  - Павлинов Г.Б." />
-                <ContactItem icon={Phone} text="+7 (952) 266-51-99  - Короткова Т.В. " />
+                <ContactItem
+                  icon={Phone}
+                  text={
+                    <>
+                      По вопросам организации обращаться по телефону:
+                      <br />
+                      +7 (952) 266-51-99
+                    </>
+                  }
+                />
               </div>
             </div>
           </div>
@@ -509,13 +517,13 @@ function DateItem({ icon: Icon, title, date, highlight = false, large = false }:
   );
 }
 
-function ContactItem({ icon: Icon, text }: { icon: any; text: string }) {
+function ContactItem({ icon: Icon, text }: { icon: any; text: ReactNode }) {
   return (
     <div className="flex items-center gap-3 text-[#1A2A36]">
       <div className="w-10 h-10 bg-[#B8A16A]/10 rounded-lg flex items-center justify-center flex-shrink-0">
         <Icon className="w-5 h-5 text-[#B8A16A]" />
       </div>
-      <span className="min-w-0">{text}</span>
+      <span className="min-w-0 leading-relaxed">{text}</span>
     </div>
   );
 }

@@ -1,16 +1,18 @@
-import { useState } from 'react';
+import { useState, type ReactNode } from 'react';
 import { CountdownTimer } from './components/CountdownTimer';
 import { ProgramCard } from './components/ProgramCard';
-import { Microscope, Dna, Brain, Monitor, Users, Database, GraduationCap, FlaskConical, Calendar, Mail, Phone, X } from 'lucide-react';
+import { Microscope, Dna, Brain, Monitor, Users, Database, GraduationCap, FlaskConical, Calendar, Mail, Phone, X, BookOpenCheck, Handshake, MapPin, HelpCircle } from 'lucide-react';
 import * as Accordion from '@radix-ui/react-accordion';
 import { ChevronDown } from 'lucide-react';
 import logoSvg from '../assets/forum-logo.png';
 import logoMirus from '../imports/logo_mirus.png';
 import logoAstrazeneca from '../imports/logo_astrazeneca.png';
 import logoKfbio from '../imports/logo_kfbio.png';
+import logoHmi from '../imports/logo_hmi.png';
 import heroBg from '../assets/hero-bg.jpg';
 import whoParticipateBg from '../assets/who-participate-microscope.png';
 import spbLandmarksBg from '../assets/spb-landmarks.png';
+import masterclassImage from '../assets/foto_2.jpg';
 import invitationImage from './assets/invitation.jpg';
 import invitationThumb from './assets/invitation-thumb.jpg';
 import chirskyInvitation from './assets/chirsky-invitation.jpg';
@@ -20,13 +22,17 @@ import chirskyInvitationPdf from './assets/chirsky-invitation.pdf';
 import { Routes, Route, Link } from 'react-router-dom';
 import Register from './Register';
 import Admin from './Admin';
+import MasterclassRegister from './MasterclassRegister';
+import MasterclassAdmin from './MasterclassAdmin';
 
 export default function App() {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/register" element={<Register />} />
+      <Route path="/masterclass-register" element={<MasterclassRegister />} />
       <Route path="/admin" element={<Admin />} />
+      <Route path="/admin-masterclass" element={<MasterclassAdmin />} />
     </Routes>
   );
 }
@@ -89,8 +95,13 @@ function HomePage() {
 
   const organizers = [
     {
+      logo: logoHmi,
+      name: 'АНО «ЗДОРОВЬЕ, МЕДИЦИНА, ИННОВАЦИИ»',
+      description: 'Идейный и технический организатор форума'
+    },
+    {
       logo: logoMirus,
-      name: 'МИРУС',
+      name: 'МИРУС МЕДИКАЛ',
       description: 'Первый организатор форума'
     },
     {
@@ -115,6 +126,8 @@ function HomePage() {
 
   return (
     <div className="min-h-screen bg-[#F8F9FA]">
+      <QuickNav />
+
       {/* Hero Section */}
       <section className="relative min-h-[620px] md:h-[700px] flex items-center justify-center py-10">
         <div
@@ -182,7 +195,7 @@ function HomePage() {
       </section>
 
       {/* Scientific Program */}
-      <section className="py-16 px-4 bg-[#F8F9FA]">
+      <section id="faq" className="py-16 px-4 bg-[#F8F9FA]">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl md:text-4xl text-center mb-12 text-[#0A2A3A]">Научная программа</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -199,7 +212,7 @@ function HomePage() {
       </section>
 
       {/* Who Should Participate */}
-      <section className="relative overflow-hidden py-16 px-4 bg-white">
+      <section id="contacts" className="relative overflow-hidden py-16 px-4 bg-white">
         <img
           src={whoParticipateBg}
           alt=""
@@ -247,9 +260,38 @@ function HomePage() {
         </div>
       </section>
 
+      {/* Masterclass */}
+      <section id="masterclass" className="py-16 px-4 bg-[#F8F9FA]">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-[1.05fr_0.95fr]">
+            <div>
+              <h2 className="text-3xl md:text-4xl mb-5 text-[#0A2A3A]">Мастер-класс</h2>
+              <p className="mb-7 max-w-2xl text-base md:text-lg leading-relaxed text-[#1A2A36]/78">
+                Практический формат для участников форума с отдельной регистрацией.
+              </p>
+              <Link
+                to="/masterclass-register"
+                className="inline-flex w-full items-center justify-center rounded-lg bg-[#B8A16A] px-6 py-4 text-center text-[#0A2A3A] shadow-md transition hover:-translate-y-0.5 hover:bg-[#A8925E] sm:w-auto"
+              >
+                Зарегистрироваться на мастер-класс
+              </Link>
+            </div>
+
+            <div className="overflow-hidden rounded-lg border border-[#E2E8F0] bg-white shadow-sm">
+              <img
+                src={masterclassImage}
+                alt="Мастер-класс"
+                className="aspect-[4/3] w-full object-cover"
+                loading="lazy"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
 
       {/* Organizers */}
-      <section className="py-16 px-4 bg-white">
+      <section id="organizers" className="py-16 px-4 bg-white">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl md:text-4xl text-center mb-12 text-[#0A2A3A]">Организаторы и партнёры</h2>
 
@@ -268,7 +310,7 @@ function HomePage() {
                       />
                     </div>
                     <div className="text-left">
-                      <p className="text-lg text-[#0A2A3A]">{organizer.name}</p>
+                      <p className="text-base sm:text-lg text-[#0A2A3A]">{organizer.name}</p>
                       <p className="text-sm text-[#1A2A36]/70">{organizer.description}</p>
                     </div>
                   </div>
@@ -350,8 +392,16 @@ function HomePage() {
               <h3 className="text-xl mb-4 text-[#0A2A3A]">Контакты:</h3>
               <div className="space-y-4">
                 <ContactItem icon={Mail} text="pmf-info@yandex.ru" />
-                <ContactItem icon={Phone} text="+7 (981) 861-91-91  - Павлинов Г.Б." />
-                <ContactItem icon={Phone} text="+7 (952) 266-51-99  - Короткова Т.В. " />
+                <ContactItem
+                  icon={Phone}
+                  text={
+                    <>
+                      По вопросам организации обращаться по телефону:
+                      <br />
+                      +7 (952) 266-51-99
+                    </>
+                  }
+                />
               </div>
             </div>
           </div>
@@ -378,6 +428,38 @@ function HomePage() {
         </div>
       </footer>
     </div>
+  );
+}
+
+function QuickNav() {
+  const links = [
+    { href: '#masterclass', label: 'Мастер-класс', icon: BookOpenCheck },
+    { href: '#organizers', label: 'Организаторы', icon: Handshake },
+    { href: '#faq', label: 'Вопросы', icon: HelpCircle },
+    { href: '#contacts', label: 'Контакты', icon: MapPin },
+  ];
+
+  return (
+    <nav
+      className="fixed left-0 top-1/2 z-30 hidden -translate-y-1/2 lg:block"
+      aria-label="Быстрая навигация"
+    >
+      <div className="flex flex-col gap-2">
+        {links.map(({ href, label, icon: Icon }) => (
+          <a
+            key={href}
+            href={href}
+            className="group flex h-11 w-11 items-center gap-2 overflow-hidden rounded-r-lg border border-l-0 border-[#D5C8A3] bg-[#0A2A3A]/94 px-3 text-sm text-[#DCC98D] shadow-md transition-all duration-200 hover:w-44 hover:bg-[#12364A]"
+            title={label}
+          >
+            <Icon className="h-5 w-5 shrink-0" aria-hidden="true" />
+            <span className="whitespace-nowrap text-[13px] text-[#EFE8D3] opacity-0 drop-shadow-sm transition-opacity group-hover:opacity-100">
+              {label}
+            </span>
+          </a>
+        ))}
+      </div>
+    </nav>
   );
 }
 
@@ -509,13 +591,13 @@ function DateItem({ icon: Icon, title, date, highlight = false, large = false }:
   );
 }
 
-function ContactItem({ icon: Icon, text }: { icon: any; text: string }) {
+function ContactItem({ icon: Icon, text }: { icon: any; text: ReactNode }) {
   return (
     <div className="flex items-center gap-3 text-[#1A2A36]">
       <div className="w-10 h-10 bg-[#B8A16A]/10 rounded-lg flex items-center justify-center flex-shrink-0">
         <Icon className="w-5 h-5 text-[#B8A16A]" />
       </div>
-      <span className="min-w-0">{text}</span>
+      <span className="min-w-0 leading-relaxed">{text}</span>
     </div>
   );
 }

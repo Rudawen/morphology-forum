@@ -1,7 +1,7 @@
 import { useState, type ReactNode } from 'react';
 import { CountdownTimer } from './components/CountdownTimer';
 import { ProgramCard } from './components/ProgramCard';
-import { Microscope, Dna, Brain, Monitor, Users, Database, GraduationCap, FlaskConical, Calendar, Mail, Phone, X, BookOpenCheck, Handshake, MapPin, HelpCircle } from 'lucide-react';
+import { Microscope, Dna, Brain, Monitor, Users, Database, GraduationCap, FlaskConical, Calendar, Mail, Phone, X, BookOpenCheck, MapPin, HelpCircle } from 'lucide-react';
 import * as Accordion from '@radix-ui/react-accordion';
 import { ChevronDown } from 'lucide-react';
 import logoSvg from '../assets/forum-logo.png';
@@ -102,7 +102,7 @@ function HomePage() {
     {
       logo: logoMirus,
       name: 'МИРУС МЕДИКАЛ',
-      description: 'Первый организатор форума'
+      description: 'Генеральный партнер'
     },
     {
       logo: logoAstrazeneca,
@@ -129,7 +129,7 @@ function HomePage() {
       <QuickNav />
 
       {/* Hero Section */}
-      <section className="relative min-h-[620px] md:h-[700px] flex items-center justify-center py-10">
+      <section id="forum-register" className="relative min-h-[620px] md:h-[700px] flex items-center justify-center py-10">
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{
@@ -166,7 +166,7 @@ function HomePage() {
     to="/register"
             className="w-full sm:w-auto bg-[#B8A16A] hover:bg-[#A8925E] text-[#0A2A3A] px-6 sm:px-8 py-4 rounded-lg transition-colors text-center shadow-md"
   >
-    Зарегистрироваться бесплатно
+    Зарегистрироваться на форум
   </Link>
 </div>
 
@@ -195,7 +195,7 @@ function HomePage() {
       </section>
 
       {/* Scientific Program */}
-      <section id="faq" className="py-16 px-4 bg-[#F8F9FA]">
+      <section className="py-16 px-4 bg-[#F8F9FA]">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl md:text-4xl text-center mb-12 text-[#0A2A3A]">Научная программа</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -212,7 +212,7 @@ function HomePage() {
       </section>
 
       {/* Who Should Participate */}
-      <section id="contacts" className="relative overflow-hidden py-16 px-4 bg-white">
+      <section className="relative overflow-hidden py-16 px-4 bg-white">
         <img
           src={whoParticipateBg}
           alt=""
@@ -245,18 +245,6 @@ function HomePage() {
             </div>
           </div>
           <InvitationPreview />
-        </div>
-      </section>
-
-      {/* Registration Packages */}
-      <section className="py-16 px-4 bg-white">
-        <div className="max-w-6xl mx-auto text-center">
-          <Link
-  to="/register"
-  className="w-full sm:w-auto bg-[#B8A16A] hover:bg-[#A8925E] text-[#0A2A3A] text-base sm:text-xl px-6 sm:px-16 py-5 rounded-lg transition-colors shadow-md inline-block text-center"
->
-  Зарегистрироваться
-</Link>
         </div>
       </section>
 
@@ -327,7 +315,7 @@ function HomePage() {
       </section>
 
       {/* FAQ */}
-      <section className="py-16 px-4 bg-[#F8F9FA]">
+      <section id="faq" className="py-16 px-4 bg-[#F8F9FA]">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl md:text-4xl text-center mb-12 text-[#0A2A3A]">Вопрос-ответ</h2>
           <Accordion.Root type="single" collapsible className="space-y-4">
@@ -351,7 +339,7 @@ function HomePage() {
       </section>
 
       {/* Contact & Venue */}
-      <section className="relative overflow-hidden py-16 px-4 bg-white">
+      <section id="contacts" className="relative overflow-hidden py-16 px-4 bg-white">
         <img
           src={spbLandmarksBg}
           alt=""
@@ -433,8 +421,8 @@ function HomePage() {
 
 function QuickNav() {
   const links = [
+    { href: '#forum-register', label: 'Форум', icon: Calendar },
     { href: '#masterclass', label: 'Мастер-класс', icon: BookOpenCheck },
-    { href: '#organizers', label: 'Организаторы', icon: Handshake },
     { href: '#faq', label: 'Вопросы', icon: HelpCircle },
     { href: '#contacts', label: 'Контакты', icon: MapPin },
   ];

@@ -1,6 +1,7 @@
 import { useState, type ReactNode } from 'react';
 import { CountdownTimer } from './components/CountdownTimer';
 import { ProgramCard } from './components/ProgramCard';
+import { ConferenceSchedule } from './components/ConferenceSchedule';
 import { Microscope, Dna, Brain, Monitor, Users, Database, GraduationCap, FlaskConical, Calendar, Mail, Phone, X, BookOpenCheck, MapPin, HelpCircle } from 'lucide-react';
 import * as Accordion from '@radix-ui/react-accordion';
 import { ChevronDown } from 'lucide-react';
@@ -211,6 +212,8 @@ function HomePage() {
         </div>
       </section>
 
+      <ConferenceSchedule />
+
       {/* Who Should Participate */}
       <section className="relative overflow-hidden py-16 px-4 bg-white">
         <img
@@ -254,9 +257,17 @@ function HomePage() {
           <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-[1.05fr_0.95fr]">
             <div>
               <h2 className="text-3xl md:text-4xl mb-5 text-[#0A2A3A]">Мастер-класс</h2>
-              <p className="mb-7 max-w-2xl text-base md:text-lg leading-relaxed text-[#1A2A36]/78">
-                Практический формат для участников форума с отдельной регистрацией.
-              </p>
+              <div className="mb-7 max-w-2xl space-y-4 text-base leading-relaxed text-[#1A2A36]/78 md:text-lg">
+                <p>
+                  Практический мастер-класс по структуризации патологоанатомических заключений в
+                  онкологии для повышения их качества и клинической значимости.
+                </p>
+                <p>
+                  Участники получат доступ к цифровым кейсам до и после форума, а также индивидуальную
+                  обратную связь. В программе: систематизация отчетов, инструменты стандартизации и
+                  применение ИИ.
+                </p>
+              </div>
               <Link
                 to="/masterclass-register"
                 className="inline-flex w-full items-center justify-center rounded-lg bg-[#B8A16A] px-6 py-4 text-center text-[#0A2A3A] shadow-md transition hover:-translate-y-0.5 hover:bg-[#A8925E] sm:w-auto"

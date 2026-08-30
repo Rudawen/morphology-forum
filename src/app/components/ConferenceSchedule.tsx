@@ -7,6 +7,23 @@ import {
   Mic2,
   Utensils,
 } from 'lucide-react';
+import artemyevaPhoto from '../../assets/speaker-photos/artemyeva.jpg';
+import bogatyrevaPhoto from '../../assets/speaker-photos/bogatyreva.jpg';
+import druyPhoto from '../../assets/speaker-photos/druy.jpg';
+import evtushenkoPhoto from '../../assets/speaker-photos/evtushenko.jpg';
+import grinevichPhoto from '../../assets/speaker-photos/grinevich.jpg';
+import imyanitovPhoto from '../../assets/speaker-photos/imyanitov.jpg';
+import kislyakovPhoto from '../../assets/speaker-photos/kislyakov.jpg';
+import kononovPhoto from '../../assets/speaker-photos/kononov.jpg';
+import konovalovPhoto from '../../assets/speaker-photos/konovalov.jpg';
+import kutinaPhoto from '../../assets/speaker-photos/kutina.jpg';
+import pavlinovPhoto from '../../assets/speaker-photos/pavlinov.jpg';
+import raskinPhoto from '../../assets/speaker-photos/raskin.jpg';
+import sharlaiPhoto from '../../assets/speaker-photos/sharlai.jpg';
+import shimanskayaPhoto from '../../assets/speaker-photos/shimanskaya.jpg';
+import skobeevPhoto from '../../assets/speaker-photos/skobeev.jpg';
+import vtorushinPhoto from '../../assets/speaker-photos/vtorushin.jpg';
+import zavalishinaPhoto from '../../assets/speaker-photos/zavalishina.jpg';
 
 type ProgramItem =
   | {
@@ -32,86 +49,127 @@ type ProgramItem =
 type SpeakerProfile = {
   fullName: string;
   credentials: string;
+  photo?: string;
+  photoPosition?: string;
 };
 
 const speakerProfiles: Record<string, SpeakerProfile> = {
   'Кононов А.В.': {
     fullName: 'Кононов Алексей Владимирович',
+    photo: kononovPhoto,
+    photoPosition: 'center 18%',
     credentials:
       'д.м.н., профессор, заслуженный деятель науки РФ, заведующий кафедрой патологической анатомии Омского государственного университета, главный внештатный специалист по патологической анатомии в Сибирском федеральном округе, лауреат премии А.И. Струкова «За лучшие научные исследования по патологической анатомии», почётный член Российского общества патологоанатомов. Омск.',
   },
   'Шиманская А.Г.': {
     fullName: 'Шиманская Анна Геннадьевна',
+    photo: shimanskayaPhoto,
+    photoPosition: 'center 18%',
     credentials:
       'к.м.н., доцент кафедры патологической анатомии Омского государственного университета, заведующая патологоанатомическим отделением Западно-Сибирского медицинского центра ФМБА России. Омск.',
   },
+  'Павлинов Г.Б.': {
+    fullName: 'Павлинов Георгий Борисович',
+    photo: pavlinovPhoto,
+    photoPosition: 'center 16%',
+    credentials:
+      'заведующий патологоанатомическим отделением ГБУЗ «Ленинградская областная клиническая больница», врач-патологоанатом высшей квалификационной категории, член правления регионального отделения Ассоциации гистотехнологов по Санкт-Петербургу и Ленинградской области. Санкт-Петербург.',
+  },
   'Евтушенко Д.А.': {
     fullName: 'Евтушенко Дмитрий Андреевич',
+    photo: evtushenkoPhoto,
+    photoPosition: 'center 18%',
     credentials:
       'врач-эндоскопист высшей квалификационной категории, заведующий эндоскопическим отделением ГВКГ им. академика Н.Н. Бурденко. Москва.',
   },
   'Гриневич В.Б.': {
     fullName: 'Гриневич Владимир Борисович',
+    photo: grinevichPhoto,
+    photoPosition: 'center 16%',
     credentials:
       'д.м.н., профессор, полковник медицинской службы, заведующий 2-й кафедрой терапии (усовершенствования врачей) Военно-медицинской академии им. С.М. Кирова, вице-президент Научного общества гастроэнтерологов России — президент Панкреатического клуба, главный гастроэнтеролог Министерства обороны РФ. Санкт-Петербург.',
   },
   'Завалишина Л.Э.': {
     fullName: 'Завалишина Лариса Эдуардовна',
+    photo: zavalishinaPhoto,
+    photoPosition: 'center 26%',
     credentials:
       'д.б.н., профессор кафедры патологической анатомии Российской медицинской академии непрерывного последипломного образования. Москва.',
   },
   'Кутина Н.И.': {
     fullName: 'Кутина Ника Игоревна',
+    photo: kutinaPhoto,
+    photoPosition: 'center 18%',
     credentials:
       'врач-патологоанатом патологоанатомического отделения ФГБУ «НМИЦ онкологии им. Н.Н. Петрова». Санкт-Петербург.',
   },
   'Артемьева А.С.': {
     fullName: 'Артемьева Анна Сергеевна',
+    photo: artemyevaPhoto,
+    photoPosition: 'center 14%',
     credentials:
       'к.м.н., член Правления РООУ, врач-патологоанатом, руководитель научной лаборатории морфологии опухолей ФГБУ «НМИЦ онкологии им. Н.Н. Петрова». Санкт-Петербург.',
   },
   'Имянитов Е.Н.': {
     fullName: 'Имянитов Евгений Наумович',
+    photo: imyanitovPhoto,
+    photoPosition: 'center 38%',
     credentials:
       'член-корреспондент РАН, д.м.н., профессор, руководитель лаборатории молекулярной онкологии и отдела биологии опухолевого роста ФГБУ «НМИЦ онкологии им. Н.Н. Петрова», заведующий кафедрой медицинской генетики Педиатрического медицинского университета, профессор кафедры онкологии СЗГМУ им. И.И. Мечникова, отличник здравоохранения РФ. Санкт-Петербург.',
   },
   'Раскин Г.А.': {
     fullName: 'Раскин Григорий Александрович',
+    photo: raskinPhoto,
+    photoPosition: 'center 18%',
     credentials:
       'д.м.н., профессор, заместитель главного врача по лабораторной медицине, врач-патологоанатом Медицинского института им. Березина Сергея, главный специалист по патоморфологии ГБУЗ СПб «Городской клинический онкологический диспансер», профессор кафедры онкологии Медицинского института Санкт-Петербургского государственного университета. Санкт-Петербург.',
   },
   'Друй А.Е.': {
     fullName: 'Друй Александр Евгеньевич',
+    photo: druyPhoto,
+    photoPosition: 'center 18%',
     credentials:
       'д.м.н., заведующий лабораторией молекулярной онкологии, доцент кафедры патологической анатомии и клинической лабораторной диагностики ФГБУ «НМИЦ ДГОИ им. Дмитрия Рогачева» Минздрава России. Москва.',
   },
   'Вторушин С.В.': {
     fullName: 'Вторушин Сергей Владимирович',
+    photo: vtorushinPhoto,
+    photoPosition: 'center 22%',
     credentials:
       'д.м.н., профессор, заместитель директора по науке и трансляционной медицине, руководитель отделения общей и молекулярной патологии НИИ онкологии Томского национального исследовательского медицинского центра, профессор кафедры патологической анатомии ФГБОУ ВО СибГМУ Минздрава России. Томск.',
   },
   'Кисляков А.Н.': {
     fullName: 'Кисляков Алексей Николаевич',
+    photo: kislyakovPhoto,
+    photoPosition: 'center 20%',
     credentials:
       'заведующий патологоанатомическим отделением ГБУЗ «Морозовская детская городская клиническая больница ДЗМ», обладатель статуса «Московский врач», врач высшей квалификационной категории. Москва.',
   },
   'Богатырева Н.Н.': {
     fullName: 'Богатырева Нина Николаевна',
+    photo: bogatyrevaPhoto,
+    photoPosition: 'center 20%',
     credentials:
       'врач-патологоанатом патологоанатомического отделения ГБУЗ «Морозовская детская городская клиническая больница ДЗМ». Москва.',
   },
   'Шарлай А.С.': {
     fullName: 'Шарлай Анастасия Сергеевна',
+    photo: sharlaiPhoto,
+    photoPosition: 'center 16%',
     credentials:
       'к.м.н., врач-лабораторный генетик патологоанатомического отделения ФГБУ «НМИЦ ДГОИ им. Дмитрия Рогачева» Минздрава России. Москва.',
   },
   'Скобеев Д.А.': {
     fullName: 'Скобеев Дмитрий Александрович',
+    photo: skobeevPhoto,
+    photoPosition: 'center 18%',
     credentials:
       'заведующий молекулярно-биологической лабораторией, врач-патологоанатом, врач клинической лабораторной диагностики ГБУЗ «Морозовская детская городская клиническая больница ДЗМ». Москва.',
   },
   'Коновалов Д.М.': {
     fullName: 'Коновалов Дмитрий Михайлович',
+    photo: konovalovPhoto,
+    photoPosition: 'center 16%',
     credentials:
       'доцент, к.м.н., заведующий патологоанатомическим отделением ФГБУ «НМИЦ ДГОИ им. Дмитрия Рогачева» Минздрава России. Москва.',
   },
@@ -460,8 +518,7 @@ function TalkRow({ item }: { item: Extract<ProgramItem, { kind: 'talk' }> }) {
                 О спикере
               </summary>
               <div className="border-t border-[#E0D5B7] p-3">
-                <p className="mb-1 text-sm font-semibold text-[#0A2A3A]">{profile.fullName}</p>
-                <p className="text-sm leading-relaxed text-[#1A2A36]/75">{profile.credentials}</p>
+                <SpeakerDetails profile={profile} compact />
               </div>
             </details>
           </>
@@ -471,11 +528,24 @@ function TalkRow({ item }: { item: Extract<ProgramItem, { kind: 'talk' }> }) {
   );
 }
 
-function SpeakerDetails({ profile }: { profile: SpeakerProfile }) {
+function SpeakerDetails({ profile, compact = false }: { profile: SpeakerProfile; compact?: boolean }) {
   return (
-    <div className="rounded-lg border border-[#E0D5B7] bg-[#F5F0E4] p-4">
-      <p className="mb-1 text-sm font-semibold text-[#0A2A3A]">{profile.fullName}</p>
-      <p className="text-sm leading-relaxed text-[#1A2A36]/75">{profile.credentials}</p>
+    <div className={compact ? '' : 'rounded-lg border border-[#E0D5B7] bg-[#F5F0E4] p-4'}>
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:gap-4">
+        {profile.photo ? (
+          <img
+            src={profile.photo}
+            alt={`Портрет: ${profile.fullName}`}
+            loading="lazy"
+            className="h-24 w-24 shrink-0 rounded-xl border-2 border-white object-cover shadow-sm sm:h-28 sm:w-28"
+            style={{ objectPosition: profile.photoPosition ?? 'center 20%' }}
+          />
+        ) : null}
+        <div className="min-w-0 flex-1">
+          <p className="mb-1 text-sm font-semibold text-[#0A2A3A]">{profile.fullName}</p>
+          <p className="text-sm leading-relaxed text-[#1A2A36]/75">{profile.credentials}</p>
+        </div>
+      </div>
     </div>
   );
 }
@@ -483,20 +553,33 @@ function SpeakerDetails({ profile }: { profile: SpeakerProfile }) {
 function DetailRow({ item }: { item: Exclude<ProgramItem, { kind: 'section' | 'talk' }> }) {
   const style = detailStyles[item.kind];
   const Icon = style.icon;
+  const masterclassSpeakers =
+    item.kind === 'masterclass'
+      ? [speakerProfiles['Артемьева А.С.'], speakerProfiles['Павлинов Г.Б.']]
+      : [];
 
   return (
-    <article className={`rounded-xl border p-4 shadow-sm md:flex md:items-center md:gap-6 md:p-5 ${style.wrapper}`}>
-      <p className="mb-3 shrink-0 text-sm font-semibold text-[#806D38] md:mb-0 md:w-28">{item.time}</p>
-      <div className="flex min-w-0 items-start gap-3">
-        <span className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg ${style.iconBox}`}>
-          <Icon className="h-5 w-5" aria-hidden="true" />
-        </span>
-        <div>
-          <h3 className="text-base leading-snug text-[#0A2A3A] md:text-lg">{item.title}</h3>
-          {item.description ? (
-            <p className="mt-1 text-sm leading-relaxed text-[#1A2A36]/70">{item.description}</p>
-          ) : null}
+    <article className={`rounded-xl border p-4 shadow-sm md:flex md:items-start md:gap-6 md:p-5 ${style.wrapper}`}>
+      <p className="mb-3 shrink-0 text-sm font-semibold text-[#806D38] md:mb-0 md:w-28 md:pt-2">{item.time}</p>
+      <div className="min-w-0 flex-1">
+        <div className="flex items-start gap-3">
+          <span className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg ${style.iconBox}`}>
+            <Icon className="h-5 w-5" aria-hidden="true" />
+          </span>
+          <div>
+            <h3 className="text-base leading-snug text-[#0A2A3A] md:text-lg">{item.title}</h3>
+            {item.description ? (
+              <p className="mt-1 text-sm leading-relaxed text-[#1A2A36]/70">{item.description}</p>
+            ) : null}
+          </div>
         </div>
+        {masterclassSpeakers.length ? (
+          <div className="mt-4 grid gap-3 xl:grid-cols-2">
+            {masterclassSpeakers.map((profile) => (
+              <SpeakerDetails key={profile.fullName} profile={profile} />
+            ))}
+          </div>
+        ) : null}
       </div>
     </article>
   );

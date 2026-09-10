@@ -2,6 +2,7 @@ import { useState, type ReactNode } from 'react';
 import { CountdownTimer } from './components/CountdownTimer';
 import { ProgramCard } from './components/ProgramCard';
 import { ConferenceSchedule } from './components/ConferenceSchedule';
+import { ParticipantGeography } from './components/ParticipantGeography';
 import { Microscope, Dna, Brain, Monitor, Users, Database, GraduationCap, FlaskConical, Calendar, Mail, Phone, X, BookOpenCheck, MapPin, HelpCircle } from 'lucide-react';
 import * as Accordion from '@radix-ui/react-accordion';
 import { ChevronDown } from 'lucide-react';
@@ -236,6 +237,8 @@ function HomePage() {
           </div>
         </div>
       </section>
+
+      <ParticipantGeography />
 
       {/* Key Dates */}
       <section className="py-16 px-4 bg-[#F8F9FA]">

@@ -4,4 +4,4 @@ This Figma Make file includes photos from [Unsplash](https://unsplash.com) used 
 
 Country outlines in the participant geography section are derived from [Natural Earth](https://www.naturalearthdata.com/), which makes its vector map data available in the public domain.
 
-City coordinates and alternate city-name matching are derived from [GeoNames](https://www.geonames.org/), licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+City coordinates in the participant geography section are derived from [GeoNames](https://www.geonames.org/), licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).

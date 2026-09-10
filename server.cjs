@@ -1,7 +1,6 @@
 const express = require('express');
 const cors = require('cors');
 const crypto = require('crypto');
-const fs = require('fs');
 const path = require('path');
 const sqlite3 = require('sqlite3').verbose();
 
@@ -13,121 +12,12 @@ const ADMIN_TOKEN = crypto.randomBytes(32).toString('hex');
 const MASTERCLASS_ADMIN_TOKEN = crypto.randomBytes(32).toString('hex');
 const COOKIE_NAME = 'pmf_admin';
 const MASTERCLASS_COOKIE_NAME = 'pmf_masterclass_admin';
-const DATABASE_PATH = process.env.DATABASE_PATH || './database.db';
-
-const cityIndex = JSON.parse(
-  fs.readFileSync(path.join(__dirname, 'server-data', 'city-index.json'), 'utf8')
-);
-
-const countryNames = {
-  AM: 'Армения',
-  AZ: 'Азербайджан',
-  BY: 'Беларусь',
-  EE: 'Эстония',
-  GE: 'Грузия',
-  KZ: 'Казахстан',
-  KG: 'Кыргызстан',
-  LV: 'Латвия',
-  LT: 'Литва',
-  MD: 'Молдова',
-  RU: 'Россия',
-  TJ: 'Таджикистан',
-  TM: 'Туркменистан',
-  UA: 'Украина',
-  UZ: 'Узбекистан',
-};
 
 app.use(cors());
 app.use(express.json());
 app.use(express.static('dist'));
 
-const db = new sqlite3.Database(DATABASE_PATH);
-
-function normalizeCity(value) {
-  return value
-    .normalize('NFKD')
-    .replace(/\p{M}/gu, '')
-    .toLocaleLowerCase('ru-RU')
-    .replace(/ё/g, 'е')
-    .replace(/[^\p{L}\p{N}]+/gu, ' ')
-    .trim();
-}
-
-function cityLookupCandidates(value) {
-  const normalized = normalizeCity(value);
-  const candidates = new Set([normalized]);
-
-  candidates.add(normalized.replace(/^(г|город|city)\s+/, '').trim());
-
-  const firstPart = normalizeCity(value.split(',')[0]);
-  candidates.add(firstPart.replace(/^(г|город|city)\s+/, '').trim());
-
-  if (
-    normalized.includes('санкт петербург') ||
-    ['спб', 'spb', 'питер', 'saint petersburg', 'st petersburg'].includes(normalized)
-  ) {
-    candidates.add('санкт петербург');
-  }
-
-  if (normalized === 'н новгород') {
-    candidates.add('нижнии новгород');
-  }
-
-  for (const candidate of [...candidates]) {
-    candidates.add(
-      candidate
-        .replace(/\s+(ленинградская|ленинградскои|московская|московскои)\s+област[ьи].*$/, '')
-        .trim()
-    );
-  }
-
-  return [...candidates].filter(Boolean);
-}
-
-function resolveCity(value) {
-  for (const candidate of cityLookupCandidates(value)) {
-    const placeIndex = cityIndex.aliases[candidate];
-
-    if (placeIndex !== undefined) {
-      const [id, name, latitude, longitude, countryCode] = cityIndex.places[placeIndex];
-      return { id, name, latitude, longitude, countryCode };
-    }
-  }
-
-  return null;
-}
-
-function cleanCityLabel(value, fallbackName) {
-  const normalized = normalizeCity(value);
-
-  if (
-    normalized.includes('санкт петербург') ||
-    ['спб', 'spb', 'питер', 'saint petersburg', 'st petersburg'].includes(normalized)
-  ) {
-    return 'Санкт-Петербург';
-  }
-
-  if (normalized === 'н новгород') {
-    return 'Нижний Новгород';
-  }
-
-  let label = value
-    .trim()
-    .replace(/^(г\.?|город|city)\s+/i, '')
-    .split(',')[0]
-    .replace(/\s+(Ленинградской|Московской)\s+области.*$/i, '')
-    .trim();
-
-  if (!label || /область$/i.test(label)) {
-    label = fallbackName;
-  }
-
-  if (label === label.toLocaleUpperCase('ru-RU')) {
-    label = label.charAt(0).toLocaleUpperCase('ru-RU') + label.slice(1).toLocaleLowerCase('ru-RU');
-  }
-
-  return label;
-}
+const db = new sqlite3.Database('./database.db');
 
 db.serialize(() => {
   db.run(`
@@ -319,72 +209,6 @@ app.post('/masterclass-register', (req, res) => {
 
 app.get('/api', (req, res) => {
   res.json({ status: 'ok' });
-});
-
-app.get('/participant-cities', (req, res) => {
-  db.all(
-    `SELECT city
-     FROM registrations
-     WHERE city IS NOT NULL AND TRIM(city) <> ''`,
-    [],
-    (err, rows) => {
-      if (err) {
-        console.error(err);
-        return res.status(500).json({ error: 'Ошибка сервера' });
-      }
-
-      const groupedCities = new Map();
-      let unmatchedParticipants = 0;
-
-      for (const row of rows) {
-        const resolved = resolveCity(row.city);
-
-        if (!resolved) {
-          unmatchedParticipants += 1;
-          continue;
-        }
-
-        const existing = groupedCities.get(resolved.id) || {
-          ...resolved,
-          count: 0,
-          labels: new Map(),
-        };
-        const cleanedLabel = cleanCityLabel(row.city, resolved.name);
-
-        existing.count += 1;
-        existing.labels.set(cleanedLabel, (existing.labels.get(cleanedLabel) || 0) + 1);
-        groupedCities.set(resolved.id, existing);
-      }
-
-      const cities = [...groupedCities.values()]
-        .map((city) => {
-          const displayName = [...city.labels.entries()].sort(
-            (left, right) => right[1] - left[1] || left[0].localeCompare(right[0], 'ru')
-          )[0][0];
-
-          return {
-            name: displayName,
-            count: city.count,
-            latitude: city.latitude,
-            longitude: city.longitude,
-            countryCode: city.countryCode,
-            country: countryNames[city.countryCode] || city.countryCode,
-          };
-        })
-        .sort((left, right) => right.count - left.count || left.name.localeCompare(right.name, 'ru'));
-
-      const countryCount = new Set(cities.map((city) => city.countryCode)).size;
-
-      res.json({
-        totalParticipants: rows.length,
-        mappedParticipants: rows.length - unmatchedParticipants,
-        unmatchedParticipants,
-        cityCount: cities.length,
-        countryCount,
-        cities,
-      });
-    }
-  );
 });
 
 app.post('/admin/login', (req, res) => {

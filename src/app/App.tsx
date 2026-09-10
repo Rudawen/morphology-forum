@@ -15,8 +15,6 @@ import heroBg from '../assets/hero-bg.jpg';
 import whoParticipateBg from '../assets/who-participate-microscope.png';
 import spbLandmarksBg from '../assets/spb-landmarks.png';
 import masterclassImage from '../assets/foto_2.jpg';
-import invitationImage from './assets/invitation.jpg';
-import invitationThumb from './assets/invitation-thumb.jpg';
 import chirskyInvitation from './assets/chirsky-invitation.jpg';
 import chirskyInvitationThumb from './assets/chirsky-invitation-thumb.jpg';
 import chirskyInvitationPdf from './assets/chirsky-invitation.pdf';
@@ -239,20 +237,6 @@ function HomePage() {
       </section>
 
       <ParticipantGeography />
-
-      {/* Key Dates */}
-      <section className="py-16 px-4 bg-[#F8F9FA]">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl md:text-4xl text-center mb-12 text-[#0A2A3A]">Важные даты</h2>
-          <div className="bg-white rounded-lg shadow-sm overflow-hidden">
-            <div className="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-[#E2E8F0]">
-              <DateItem icon={Calendar} title="Начало регистрации" date="25 мая 2026 года" />
-              <DateItem icon={Calendar} title="Дата форума" date="2 октября 2026 года" highlight large />
-            </div>
-          </div>
-          <InvitationPreview />
-        </div>
-      </section>
 
       {/* Masterclass */}
       <section id="masterclass" className="py-16 px-4 bg-[#F8F9FA]">
@@ -527,69 +511,6 @@ function ExpertInvitationPreview() {
         </div>
       )}
     </>
-  );
-}
-
-function InvitationPreview() {
-  const [open, setOpen] = useState(false);
-
-  return (
-    <>
-      <div className="mt-10 text-center">
-        <button
-          type="button"
-          onClick={() => setOpen(true)}
-          className="inline-flex flex-col items-center rounded-lg border border-[#E2E8F0] bg-white p-3 shadow-sm transition hover:shadow-md"
-          aria-label="Открыть приглашение форума"
-        >
-          <img
-            src={invitationThumb}
-            alt="Приглашение на Петербургский морфологический форум"
-            className="w-full max-w-xs rounded-md"
-            loading="lazy"
-          />
-          <span className="mt-3 text-sm text-[#B8A16A]">Нажмите, чтобы открыть приглашение</span>
-        </button>
-      </div>
-
-      {open && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-[#0A2A3A]/90 p-4"
-          role="dialog"
-          aria-modal="true"
-          onClick={() => setOpen(false)}
-        >
-          <button
-            type="button"
-            onClick={() => setOpen(false)}
-            className="absolute right-4 top-4 rounded-full bg-white/95 p-3 text-[#0A2A3A] shadow"
-            aria-label="Закрыть приглашение"
-          >
-            <X className="h-5 w-5" />
-          </button>
-          <img
-            src={invitationImage}
-            alt="Приглашение на Петербургский морфологический форум"
-            className="max-h-[90vh] max-w-[95vw] rounded-lg object-contain shadow-2xl"
-            onClick={(event) => event.stopPropagation()}
-          />
-        </div>
-      )}
-    </>
-  );
-}
-
-function DateItem({ icon: Icon, title, date, highlight = false, large = false }: { icon: any; title: string; date: string; highlight?: boolean; large?: boolean }) {
-  return (
-    <div className={`p-5 sm:p-6 ${highlight ? 'bg-[#B8A16A]/12' : ''}`}>
-      <div className="flex items-start gap-3">
-        <Icon className={`${large ? 'w-7 h-7' : 'w-5 h-5'} mt-1 flex-shrink-0 ${highlight ? 'text-[#B8A16A]' : 'text-[#B8A16A]'}`} />
-        <div>
-          <h3 className={`${large ? 'text-xl' : 'text-base'} mb-1 text-[#0A2A3A]`}>{title}</h3>
-          <p className={`${large ? 'text-lg font-semibold text-[#B8A16A]' : 'text-sm text-[#1A2A36]/70'}`}>{date}</p>
-        </div>
-      </div>
-    </div>
   );
 }
 

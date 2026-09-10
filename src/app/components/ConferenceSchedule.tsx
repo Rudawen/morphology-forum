@@ -379,8 +379,15 @@ const conferenceProgram: ProgramItem[] = [
     description: 'Подведение итогов',
   },
   {
+    kind: 'talk',
+    time: '17:00–17:10',
+    number: 19,
+    speaker: 'Лебедев Г.В.',
+    title: 'Цифровая патология будущего. При поддержке компании KFBIO-Россия',
+  },
+  {
     kind: 'masterclass',
-    time: '17:00–18:30',
+    time: '17:10–18:40',
     title: 'Мастер-класс по формулировке патологоанатомических заключений в онкопатологии',
     description: 'Артемьева А.С., Павлинов Г.Б.',
   },
@@ -424,15 +431,15 @@ export function ConferenceSchedule() {
           </p>
           <h2 className="mb-3 text-3xl text-[#0A2A3A] md:text-4xl">Подробная программа конференции</h2>
           <p className="mx-auto max-w-2xl text-sm leading-relaxed text-[#1A2A36]/70 md:text-base">
-            Регистрация начинается в 08:30. Основная программа включает четыре научные секции и 18
-            докладов, после закрытия конференции состоится мастер-класс.
+            Регистрация начинается в 08:30. Основная программа включает четыре научные секции и 19
+            докладов, затем состоится мастер-класс.
           </p>
         </div>
 
         <div className="mb-8 grid grid-cols-3 overflow-hidden rounded-xl border border-[#D7E1E7] bg-[#F8F9FA] text-center shadow-sm">
-          <ProgramFact value="08:30–18:30" label="время программы" />
+          <ProgramFact value="08:30–18:40" label="время программы" />
           <ProgramFact value="4" label="научные секции" />
-          <ProgramFact value="18" label="докладов" />
+          <ProgramFact value="19" label="докладов" />
         </div>
 
         <ol className="space-y-3">

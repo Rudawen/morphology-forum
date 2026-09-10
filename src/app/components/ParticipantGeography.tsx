@@ -1,5 +1,6 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Globe2, MapPin, Users } from 'lucide-react';
+import participantGeography from '../../data/participant-cities.json';
 import regionCountries from '../../data/region-countries.json';
 
 type Position = [number, number];
@@ -31,6 +32,8 @@ type GeographyResponse = {
   countryCount: number;
   cities: ParticipantCity[];
 };
+
+const data = participantGeography as GeographyResponse;
 
 const VIEWBOX_WIDTH = 1120;
 const VIEWBOX_HEIGHT = 500;
@@ -83,39 +86,7 @@ function pluralize(value: number, forms: [string, string, string]) {
 }
 
 export function ParticipantGeography() {
-  const [data, setData] = useState<GeographyResponse | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [failed, setFailed] = useState(false);
   const [activeCity, setActiveCity] = useState<string | null>(null);
-
-  useEffect(() => {
-    const controller = new AbortController();
-
-    async function loadCities() {
-      try {
-        const response = await fetch('/participant-cities', {
-          credentials: 'same-origin',
-          signal: controller.signal,
-        });
-
-        if (!response.ok) throw new Error('Failed to load participant geography');
-
-        const nextData = (await response.json()) as GeographyResponse;
-        setData(nextData);
-        setFailed(false);
-      } catch (error) {
-        if (!controller.signal.aborted) {
-          console.error(error);
-          setFailed(true);
-        }
-      } finally {
-        if (!controller.signal.aborted) setLoading(false);
-      }
-    }
-
-    loadCities();
-    return () => controller.abort();
-  }, []);
 
   const countryPaths = useMemo(
     () =>
@@ -128,11 +99,11 @@ export function ParticipantGeography() {
   );
 
   const citiesForMap = useMemo(
-    () => [...(data?.cities || [])].sort((left, right) => left.count - right.count),
-    [data]
+    () => [...data.cities].sort((left, right) => left.count - right.count),
+    []
   );
 
-  const activeCityData = data?.cities.find((city) => city.name === activeCity) || null;
+  const activeCityData = data.cities.find((city) => city.name === activeCity) || null;
 
   return (
     <section id="geography" className="overflow-hidden bg-[#0A2A3A] px-4 py-16 text-white">
@@ -148,26 +119,7 @@ export function ParticipantGeography() {
           </p>
         </div>
 
-        {loading && (
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-8 text-center text-white/70">
-            Загружаем географию участников…
-          </div>
-        )}
-
-        {!loading && failed && (
-          <div className="rounded-2xl border border-[#B8A16A]/35 bg-white/5 p-8 text-center text-white/75">
-            Карта временно недоступна. Попробуйте обновить страницу чуть позже.
-          </div>
-        )}
-
-        {!loading && !failed && data && data.cities.length === 0 && (
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-8 text-center text-white/70">
-            Здесь появятся города зарегистрированных участников.
-          </div>
-        )}
-
-        {!loading && !failed && data && data.cities.length > 0 && (
-          <>
+        <>
             <div className="mb-6 grid grid-cols-1 gap-3 sm:grid-cols-3">
               <GeographyStat
                 icon={Users}
@@ -307,8 +259,7 @@ export function ParticipantGeography() {
                 </button>
               ))}
             </div>
-          </>
-        )}
+        </>
       </div>
     </section>
   );

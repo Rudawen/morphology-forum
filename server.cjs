@@ -128,50 +128,10 @@ function requireMasterclassAdmin(req, res, next) {
 }
 
 app.post('/register', (req, res) => {
-  const {
-    first_name,
-    last_name,
-    email,
-    phone,
-    organization,
-    position,
-    city,
-    specialty,
-  } = req.body;
-
-  const values = [
-    first_name,
-    last_name,
-    email,
-    phone,
-    organization,
-    position,
-    city,
-    specialty,
-  ];
-
-  if (values.some((value) => typeof value !== 'string' || !value.trim())) {
-    return res.status(400).json({ error: 'Заполните все поля' });
-  }
-
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    return res.status(400).json({ error: 'Введите корректный Email' });
-  }
-
-  db.run(
-    `INSERT INTO registrations
-      (first_name, last_name, email, phone, organization, position, city, specialty)
-     VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
-    values.map((value) => value.trim()),
-    function (err) {
-      if (err) {
-        console.error(err);
-        return res.status(500).json({ error: 'Ошибка сервера' });
-      }
-
-      res.json({ success: true });
-    }
-  );
+  res.status(410).json({
+    closed: true,
+    error: 'Регистрация на конференцию закрыта',
+  });
 });
 
 app.post('/masterclass-register', (req, res) => {

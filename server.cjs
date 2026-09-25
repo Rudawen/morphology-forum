@@ -135,36 +135,10 @@ app.post('/register', (req, res) => {
 });
 
 app.post('/masterclass-register', (req, res) => {
-  const { full_name, email, phone, workplace = '' } = req.body;
-
-  const requiredValues = [full_name, email, phone];
-
-  if (requiredValues.some((value) => typeof value !== 'string' || !value.trim())) {
-    return res.status(400).json({ error: 'Заполните обязательные поля' });
-  }
-
-  if (typeof workplace !== 'string') {
-    return res.status(400).json({ error: 'Проверьте место работы / должность' });
-  }
-
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    return res.status(400).json({ error: 'Введите корректный Email' });
-  }
-
-  db.run(
-    `INSERT INTO masterclass_registrations
-      (full_name, email, phone, workplace)
-     VALUES (?, ?, ?, ?)`,
-    [full_name, email, phone, workplace].map((value) => value.trim()),
-    function (err) {
-      if (err) {
-        console.error(err);
-        return res.status(500).json({ error: 'Ошибка сервера' });
-      }
-
-      res.json({ success: true });
-    }
-  );
+  res.status(410).json({
+    closed: true,
+    error: 'Регистрация на мастер-класс закрыта',
+  });
 });
 
 app.get('/api', (req, res) => {

@@ -259,7 +259,7 @@ function HomePage() {
                 to="/masterclass-register"
                 className="inline-flex w-full items-center justify-center rounded-lg bg-[#B8A16A] px-6 py-4 text-center text-[#0A2A3A] shadow-md transition hover:-translate-y-0.5 hover:bg-[#A8925E] sm:w-auto"
               >
-                Зарегистрироваться на мастер-класс
+                Регистрация на мастер-класс закрыта
               </Link>
             </div>
 

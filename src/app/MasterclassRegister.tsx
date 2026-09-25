@@ -1,130 +1,40 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { CalendarHeart, Video } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export default function MasterclassRegister() {
-  const [form, setForm] = useState({
-    full_name: "",
-    email: "",
-    phone: "",
-    workplace: "",
-  });
-  const [message, setMessage] = useState("");
-  const [loading, setLoading] = useState(false);
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setForm({
-      ...form,
-      [event.target.name]: event.target.value,
-    });
-  };
-
-  const handleSubmit = async (event: React.FormEvent) => {
-    event.preventDefault();
-    setMessage("");
-
-    if (!form.full_name.trim() || !form.email.trim() || !form.phone.trim()) {
-      setMessage("Заполните ФИО, Email и телефон");
-      return;
-    }
-
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
-      setMessage("Введите корректный Email");
-      return;
-    }
-
-    setLoading(true);
-
-    try {
-      const response = await fetch("/masterclass-register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(form),
-      });
-
-      if (!response.ok) {
-        const data = await response.json().catch(() => null);
-        throw new Error(data?.error || "Ошибка сохранения");
-      }
-
-      setMessage("Регистрация на мастер-класс успешно отправлена");
-      setForm({
-        full_name: "",
-        email: "",
-        phone: "",
-        workplace: "",
-      });
-    } catch (error) {
-      console.error(error);
-      setMessage(error instanceof Error ? error.message : "Ошибка сохранения");
-    } finally {
-      setLoading(false);
-    }
-  };
-
   return (
-    <div className="min-h-screen bg-[#F8F9FA] flex items-center justify-center p-4 sm:p-6">
-      <div className="w-full max-w-2xl bg-white shadow-xl rounded-2xl p-5 md:p-8">
-        <Link
-          to="/"
-          className="mb-6 inline-flex text-sm text-[#B8A16A] hover:text-[#0A2A3A]"
-        >
-          ← Назад на сайт
-        </Link>
+    <div className="flex min-h-screen items-center justify-center bg-[#F8F9FA] p-4 sm:p-6">
+      <main className="w-full max-w-2xl rounded-2xl bg-white p-6 text-center shadow-xl md:p-10">
+        <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-[#B8A16A]/15">
+          <CalendarHeart className="h-8 w-8 text-[#9A844E]" aria-hidden="true" />
+        </div>
 
-        <h1 className="text-2xl md:text-4xl font-bold mb-3 text-center text-[#0A2A3A]">
-          Регистрация на мастер-класс
+        <p className="mb-3 text-sm font-medium uppercase tracking-[0.18em] text-[#9A844E]">
+          Петербургский Морфологический Форум
+        </p>
+        <h1 className="mb-5 text-3xl font-bold text-[#0A2A3A] md:text-4xl">
+          Регистрация на мастер-класс закрыта
         </h1>
-        <p className="mb-8 text-center text-sm text-[#1A2A36]/70">
-          Отдельная форма для участия в мастер-классе
+        <p className="mx-auto max-w-xl text-base leading-relaxed text-[#1A2A36]/75 md:text-lg">
+          К сожалению, регистрация на мастер-класс завершена. Мы будем рады видеть всех желающих
+          на Петербургском Морфологическом Форуме в 2027 году.
         </p>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <input
-            name="full_name"
-            value={form.full_name}
-            onChange={handleChange}
-            placeholder="ФИО"
-            className="w-full min-w-0 border p-4 rounded-xl"
-          />
+        <div className="my-7 rounded-xl border border-[#E0D5B7] bg-[#F5F0E4] p-5 text-left sm:flex sm:items-start sm:gap-4">
+          <Video className="mx-auto mb-3 h-7 w-7 shrink-0 text-[#9A844E] sm:mx-0 sm:mb-0" aria-hidden="true" />
+          <p className="text-sm leading-relaxed text-[#1A2A36]/80 md:text-base">
+            После мероприятия мы опубликуем анонс записи для тех, у кого не получилось
+            присутствовать лично. Следите за новостями форума.
+          </p>
+        </div>
 
-          <input
-            name="email"
-            type="email"
-            value={form.email}
-            onChange={handleChange}
-            placeholder="Email"
-            className="w-full min-w-0 border p-4 rounded-xl"
-          />
-
-          <input
-            name="phone"
-            value={form.phone}
-            onChange={handleChange}
-            placeholder="Телефон"
-            className="w-full min-w-0 border p-4 rounded-xl"
-          />
-
-          <input
-            name="workplace"
-            value={form.workplace}
-            onChange={handleChange}
-            placeholder="Место работы / должность (опционально)"
-            className="w-full min-w-0 border p-4 rounded-xl"
-          />
-
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full bg-[#B8A16A] text-[#0A2A3A] p-4 rounded-xl transition hover:bg-[#A8925E] disabled:opacity-70"
-          >
-            {loading ? "Отправка..." : "Зарегистрироваться на мастер-класс"}
-          </button>
-
-          {message && <div className="text-center mt-4">{message}</div>}
-        </form>
-      </div>
+        <Link
+          to="/"
+          className="inline-flex w-full items-center justify-center rounded-xl bg-[#B8A16A] px-6 py-4 font-medium text-[#0A2A3A] transition hover:bg-[#A8925E] sm:w-auto"
+        >
+          Вернуться на сайт
+        </Link>
+      </main>
     </div>
   );
 }

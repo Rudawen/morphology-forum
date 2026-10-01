@@ -32,6 +32,12 @@ Supabase has been removed from the registration form. The site now saves registr
    - Added an independent registration flow for the master class.
    - Added a separate admin panel with list and delete actions.
 
+7. `src/app/Feedback.tsx` and `src/app/FeedbackAdmin.tsx`
+   - Added an anonymous feedback form at `/feedback`.
+   - Contact details are optional and require explicit consent when supplied.
+   - Added a password-protected response list, CSV export and deletion at `/admin-feedback`.
+   - Feedback is stored separately in the `feedback_responses` SQLite table.
+
 ## How to run
 
 ```bash
@@ -65,6 +71,15 @@ Master class admin panel:
 ```text
 http://localhost:5050/admin-masterclass
 ```
+
+Feedback form and admin panel:
+
+```text
+http://localhost:5050/feedback
+http://localhost:5050/admin-feedback
+```
+
+The feedback admin panel uses `ADMIN_PASSWORD`.
 
 Use the password from `MASTERCLASS_ADMIN_PASSWORD`. If it is not set, the temporary default is `123098QA`; change it on real hosting.
 

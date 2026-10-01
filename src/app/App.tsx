@@ -3,7 +3,7 @@ import { CountdownTimer } from './components/CountdownTimer';
 import { ProgramCard } from './components/ProgramCard';
 import { ConferenceSchedule } from './components/ConferenceSchedule';
 import { ParticipantGeography } from './components/ParticipantGeography';
-import { Microscope, Dna, Brain, Monitor, Users, Database, GraduationCap, FlaskConical, Calendar, Mail, Phone, X, BookOpenCheck, MapPin, HelpCircle } from 'lucide-react';
+import { Microscope, Dna, Brain, Monitor, Users, Database, GraduationCap, FlaskConical, Calendar, Mail, Phone, X, BookOpenCheck, MapPin, HelpCircle, MessageSquareText } from 'lucide-react';
 import * as Accordion from '@radix-ui/react-accordion';
 import { ChevronDown } from 'lucide-react';
 import logoSvg from '../assets/forum-logo.png';
@@ -24,6 +24,8 @@ import Register from './Register';
 import Admin from './Admin';
 import MasterclassRegister from './MasterclassRegister';
 import MasterclassAdmin from './MasterclassAdmin';
+import Feedback from './Feedback';
+import FeedbackAdmin from './FeedbackAdmin';
 
 export default function App() {
   return (
@@ -33,6 +35,8 @@ export default function App() {
       <Route path="/masterclass-register" element={<MasterclassRegister />} />
       <Route path="/admin" element={<Admin />} />
       <Route path="/admin-masterclass" element={<MasterclassAdmin />} />
+      <Route path="/feedback" element={<Feedback />} />
+      <Route path="/admin-feedback" element={<FeedbackAdmin />} />
     </Routes>
   );
 }
@@ -191,6 +195,31 @@ function HomePage() {
               Мы создаём пространство, где говорят на одном языке ради главного — точного диагноза и эффективного лечения пациента.
             </p>
           </div>
+        </div>
+      </section>
+
+      {/* Feedback */}
+      <section id="feedback" className="border-y border-[#E9E1CF] bg-[#F5F0E4] px-4 py-12">
+        <div className="mx-auto flex max-w-5xl flex-col items-center gap-6 rounded-2xl bg-white p-6 text-center shadow-sm md:flex-row md:p-9 md:text-left">
+          <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-[#B8A16A]/15">
+            <MessageSquareText className="h-8 w-8 text-[#9A844E]" aria-hidden="true" />
+          </div>
+          <div className="flex-1">
+            <p className="mb-2 text-sm font-medium uppercase tracking-[0.14em] text-[#9A844E]">Ваше мнение важно</p>
+            <h2 className="mb-3 text-2xl font-semibold text-[#0A2A3A] md:text-3xl">
+              Помогите сделать форум 2027 ещё полезнее
+            </h2>
+            <p className="leading-relaxed text-[#1A2A36]/72">
+              Расскажите, что вам понравилось, какие темы вы хотите услышать и готовы ли принять
+              участие. Анкета анонимная, контакты можно оставить только по желанию.
+            </p>
+          </div>
+          <Link
+            to="/feedback"
+            className="inline-flex w-full shrink-0 items-center justify-center rounded-xl bg-[#B8A16A] px-6 py-4 font-medium text-[#0A2A3A] transition hover:-translate-y-0.5 hover:bg-[#A8925E] md:w-auto"
+          >
+            Поделиться мнением
+          </Link>
         </div>
       </section>
 
@@ -420,6 +449,7 @@ function HomePage() {
 function QuickNav() {
   const links = [
     { href: '#forum-register', label: 'Форум', icon: Calendar },
+    { href: '#feedback', label: 'Обратная связь', icon: MessageSquareText },
     { href: '#masterclass', label: 'Мастер-класс', icon: BookOpenCheck },
     { href: '#faq', label: 'Вопросы', icon: HelpCircle },
     { href: '#contacts', label: 'Контакты', icon: MapPin },

@@ -23,6 +23,18 @@ http://localhost:5050
 http://localhost:5050/admin
 ```
 
+Обратная связь:
+
+```text
+http://localhost:5050/feedback
+```
+
+Закрытый просмотр ответов (тот же пароль `ADMIN_PASSWORD`):
+
+```text
+http://localhost:5050/admin-feedback
+```
+
 Для разработки можно запускать:
 
 ```bash

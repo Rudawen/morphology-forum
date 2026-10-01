@@ -14,10 +14,10 @@ const COOKIE_NAME = 'pmf_admin';
 const MASTERCLASS_COOKIE_NAME = 'pmf_masterclass_admin';
 
 app.use(cors());
-app.use(express.json());
+app.use(express.json({ limit: '32kb' }));
 app.use(express.static('dist'));
 
-const db = new sqlite3.Database('./database.db');
+const db = new sqlite3.Database(process.env.DATABASE_PATH || './database.db');
 
 db.serialize(() => {
   db.run(`
@@ -93,7 +93,36 @@ db.serialize(() => {
       }
     }
   });
+
+  db.run(`
+    CREATE TABLE IF NOT EXISTS feedback_responses (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      rating INTEGER NOT NULL,
+      liked TEXT,
+      improvements TEXT,
+      next_topics TEXT,
+      participation TEXT,
+      respondent_name TEXT,
+      contact TEXT,
+      organization TEXT,
+      consent INTEGER DEFAULT 0,
+      created_at TEXT DEFAULT CURRENT_TIMESTAMP
+    )
+  `);
 });
+
+const feedbackParticipationOptions = new Set([
+  'Предложить доклад',
+  'Провести мастер-класс',
+  'Стать партнёром форума',
+  'Помочь в организации',
+  'Получать новости форума',
+]);
+
+function cleanText(value, maxLength) {
+  if (typeof value !== 'string') return '';
+  return value.trim().slice(0, maxLength);
+}
 
 function parseCookies(req) {
   return Object.fromEntries(
@@ -141,6 +170,59 @@ app.post('/masterclass-register', (req, res) => {
   });
 });
 
+app.post('/feedback', (req, res) => {
+  const body = req.body && typeof req.body === 'object' ? req.body : {};
+
+  if (cleanText(body.website, 200)) {
+    return res.json({ success: true });
+  }
+
+  const rating = Number(body.rating);
+  if (!Number.isInteger(rating) || rating < 1 || rating > 5) {
+    return res.status(400).json({ error: 'Поставьте оценку от 1 до 5' });
+  }
+
+  const participation = Array.isArray(body.participation)
+    ? body.participation.filter((item) => feedbackParticipationOptions.has(item)).slice(0, 5)
+    : [];
+  const liked = cleanText(body.liked, 2000);
+  const improvements = cleanText(body.improvements, 2000);
+  const nextTopics = cleanText(body.next_topics, 2000);
+  const respondentName = cleanText(body.respondent_name, 160);
+  const contact = cleanText(body.contact, 240);
+  const organization = cleanText(body.organization, 240);
+  const hasContacts = Boolean(respondentName || contact || organization);
+
+  if (hasContacts && body.consent !== true) {
+    return res.status(400).json({ error: 'Подтвердите согласие на обработку контактных данных' });
+  }
+
+  db.run(
+    `INSERT INTO feedback_responses
+      (rating, liked, improvements, next_topics, participation, respondent_name, contact, organization, consent)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+    [
+      rating,
+      liked,
+      improvements,
+      nextTopics,
+      participation.join(' | '),
+      respondentName,
+      contact,
+      organization,
+      hasContacts ? 1 : 0,
+    ],
+    function (err) {
+      if (err) {
+        console.error(err);
+        return res.status(500).json({ error: 'Не удалось сохранить ответ' });
+      }
+
+      res.json({ success: true, id: this.lastID });
+    },
+  );
+});
+
 app.get('/api', (req, res) => {
   res.json({ status: 'ok' });
 });
@@ -177,6 +259,40 @@ app.get('/registrations', requireAdmin, (req, res) => {
     }
 
     res.json(rows);
+  });
+});
+
+app.get('/feedback-responses', requireAdmin, (req, res) => {
+  db.all(
+    `SELECT id, rating, liked, improvements, next_topics, participation,
+            respondent_name, contact, organization, created_at
+     FROM feedback_responses
+     ORDER BY id DESC`,
+    [],
+    (err, rows) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).json({ error: 'Ошибка сервера' });
+      }
+
+      res.json(rows);
+    },
+  );
+});
+
+app.delete('/feedback-responses/:id', requireAdmin, (req, res) => {
+  const id = Number(req.params.id);
+  if (!Number.isInteger(id) || id <= 0) {
+    return res.status(400).json({ error: 'Некорректный ID' });
+  }
+
+  db.run('DELETE FROM feedback_responses WHERE id = ?', [id], function (err) {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ error: 'Ошибка сервера' });
+    }
+
+    res.json({ success: true, deleted: this.changes });
   });
 });
 

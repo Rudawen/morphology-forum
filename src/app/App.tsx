@@ -110,7 +110,7 @@ function HomePage() {
     },
     {
       logo: logoAstrazeneca,
-      name: 'Астразенека',
+      name: 'ООО "АстраЗенека Фармасьютикалз"',
       description: 'Партнёр форума'
     },
     {

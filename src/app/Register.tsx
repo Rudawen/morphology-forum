@@ -13,18 +13,19 @@ export default function Register() {
           Петербургский Морфологический Форум
         </p>
         <h1 className="mb-5 text-3xl font-bold text-[#0A2A3A] md:text-4xl">
-          Регистрация на конференцию закрыта
+          Регистрация на конференцию 2026 года закрыта
         </h1>
         <p className="mx-auto max-w-xl text-base leading-relaxed text-[#1A2A36]/75 md:text-lg">
           К сожалению, регистрация на конференцию завершена. Мы будем рады видеть всех желающих
-          на Петербургском Морфологическом Форуме в 2027 году.
+          на следующем Петербургском Морфологическом Форуме 2 октября 2027 года.
         </p>
 
         <div className="my-7 rounded-xl border border-[#E0D5B7] bg-[#F5F0E4] p-5 text-left sm:flex sm:items-start sm:gap-4">
           <Video className="mx-auto mb-3 h-7 w-7 shrink-0 text-[#9A844E] sm:mx-0 sm:mb-0" aria-hidden="true" />
           <p className="text-sm leading-relaxed text-[#1A2A36]/80 md:text-base">
-            После мероприятия мы опубликуем анонс записи для тех, у кого не получилось
-            присутствовать лично. Следите за новостями форума.
+            Фотографии и видеозаписи конференции 2026 года доступны в разделе{' '}
+            <Link to="/#materials" className="font-medium text-[#806D38] underline underline-offset-4">материалов форума</Link>.
+            {' '}Вы также можете <Link to="/feedback" className="font-medium text-[#806D38] underline underline-offset-4">оставить обратную связь</Link>.
           </p>
         </div>
 

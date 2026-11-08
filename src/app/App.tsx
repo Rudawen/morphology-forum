@@ -1,9 +1,8 @@
 import { useState, type ReactNode } from 'react';
-import { CountdownTimer } from './components/CountdownTimer';
 import { ProgramCard } from './components/ProgramCard';
 import { ConferenceSchedule } from './components/ConferenceSchedule';
 import { ParticipantGeography } from './components/ParticipantGeography';
-import { Microscope, Dna, Brain, Monitor, Users, Database, GraduationCap, FlaskConical, Calendar, Mail, Phone, X, BookOpenCheck, MapPin, HelpCircle, MessageSquareText } from 'lucide-react';
+import { Microscope, Dna, Brain, Monitor, Users, Database, GraduationCap, FlaskConical, Calendar, Mail, Phone, X, BookOpenCheck, MapPin, HelpCircle, MessageSquareText, Images, Video, ArrowUpRight } from 'lucide-react';
 import * as Accordion from '@radix-ui/react-accordion';
 import { ChevronDown } from 'lucide-react';
 import logoSvg from '../assets/forum-logo.png';
@@ -43,8 +42,6 @@ export default function App() {
 
 
 function HomePage() {
-  const forumDate = new Date('2026-10-02T09:00:00');
-
   const programs = [
     {
       icon: Microscope,
@@ -121,11 +118,11 @@ function HomePage() {
   ];
 
   const faqItems = [
-    { q: 'Где встречаемся?', a: 'В центре г.Санкт-Петербург' },
-    { q: 'Будет ли запись мероприятия?', a: 'Да, все будет на канале в Ютуб и Рутуб' },
-    { q: 'Можно ли ещё зарегистрироваться?', a: 'Регистрация на конференцию 2026 года закрыта. Будем рады видеть вас на форуме в 2027 году.' },
-    { q: 'Меня отпустят с работы?', a: 'Да, свяжитесь с нами для получения именного приглашения' },
-   
+    { q: 'Когда состоится следующий форум?', a: 'Следующий Петербургский морфологический форум запланирован на 2 октября 2027 года. Программу и подробности участия сообщим дополнительно.' },
+    { q: 'Где посмотреть фотографии и видеозаписи?', a: <>Фотографии и записи докладов форума 2026 года собраны в разделе <a href="#materials" className="font-medium text-[#806D38] underline underline-offset-4">«Материалы форума 2026»</a>. Новости публикуем в нашей группе ВКонтакте.</> },
+    { q: 'Можно ли зарегистрироваться?', a: 'Регистрация на форум и мастер-класс 2026 года закрыта. О начале регистрации на форум 2027 года сообщим на сайте и в группе ВКонтакте.' },
+    { q: 'Как оставить пожелания к следующему форуму?', a: <>Заполните <Link to="/feedback" className="font-medium text-[#806D38] underline underline-offset-4">форму обратной связи</Link>. Анкета анонимная, контакты можно оставить по желанию.</> },
+    { q: 'Где пройдёт форум 2027 года?', a: 'Информацию о площадке следующего форума опубликуем дополнительно. Адрес ниже относится к форуму 2026 года.' },
   ];
 
   return (
@@ -158,27 +155,35 @@ function HomePage() {
           <p className="text-center text-lg md:text-xl text-white/90 mb-2 max-w-3xl mx-auto">
             Междисциплинарная коллаборация с патологом
           </p>
-          <p className="text-center text-xl md:text-2xl text-white mb-2">2 октября 2026 года</p>
-          <p className="text-center text-lg text-white/90 mb-8">Очно в г.Санкт-Петербурге</p>
+          <p className="mt-6 text-center text-sm font-semibold uppercase tracking-[0.16em] text-[#DCC98D]">
+            До встречи на форуме 2027
+          </p>
+          <p className="mt-3 text-center text-3xl font-semibold text-white md:text-4xl">
+            <time dateTime="2027-10-02">2 октября 2027 года</time>
+          </p>
+          <p className="mx-auto mb-7 mt-4 max-w-2xl text-center text-base leading-relaxed text-white/85">
+            Сохраните дату. Подробности о программе, площадке и регистрации сообщим позже.
+          </p>
 
-          <div className="mb-8">
-            <CountdownTimer targetDate={forumDate} />
+          <div className="mb-6 flex flex-col justify-center gap-3 sm:flex-row sm:flex-wrap">
+            <a href="#materials" className="rounded-lg bg-[#B8A16A] px-6 py-3 text-center font-medium text-[#0A2A3A] transition-colors hover:bg-[#A8925E]">
+              Фото и видео форума 2026
+            </a>
+            <Link to="/feedback" className="rounded-lg border border-white/45 px-6 py-3 text-center font-medium text-white transition-colors hover:bg-white/10">
+              Оставить обратную связь
+            </Link>
+            <a href="#program-archive" className="rounded-lg border border-white/45 px-6 py-3 text-center font-medium text-white transition-colors hover:bg-white/10">
+              Программа 2026
+            </a>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
-  <Link
-    to="/register"
-            className="w-full sm:w-auto bg-[#B8A16A] hover:bg-[#A8925E] text-[#0A2A3A] px-6 sm:px-8 py-4 rounded-lg transition-colors text-center shadow-md"
-  >
-    Регистрация на форум закрыта
-  </Link>
-</div>
-
           <p className="text-center text-xs text-white/80 max-w-2xl mx-auto">
-            Сайт предназначен для медицинских работников и исследователей. Нажимая «Продолжить», вы подтверждаете, что являетесь специалистом в области патологической анатомии, судебной медицины, онкологии, морфологии, гистологии, биологии или молекулярной генетики.
+            Сайт предназначен для медицинских работников и исследователей в области патологической анатомии, судебной медицины, онкологии, морфологии, гистологии, биологии и молекулярной генетики.
           </p>
         </div>
       </section>
+
+      <ConferenceMaterials />
 
       {/* About Section */}
       <section className="py-16 px-4 bg-white">
@@ -223,24 +228,37 @@ function HomePage() {
         </div>
       </section>
 
-      {/* Scientific Program */}
-      <section className="py-16 px-4 bg-[#F8F9FA]">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl md:text-4xl text-center mb-12 text-[#0A2A3A]">Научная программа</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {programs.map((program, index) => (
-              <ProgramCard
-                key={index}
-                icon={program.icon}
-                title={program.title}
-                description={program.description}
-              />
-            ))}
-          </div>
+      {/* The complete 2026 program stays available without dominating the home page. */}
+      <section id="program-archive" className="scroll-mt-6 bg-[#F8F9FA] px-4 py-10 md:py-12">
+        <div className="mx-auto max-w-6xl">
+          <h2 className="mb-3 text-center text-2xl text-[#0A2A3A] md:text-3xl">Программа форума 2026</h2>
+          <p className="mx-auto mb-6 max-w-2xl text-center leading-relaxed text-[#1A2A36]/75">
+            Архив состоявшейся конференции: 4 научные секции, 19 докладов и мастер-класс.
+            Программа форума 2027 будет опубликована отдельно.
+          </p>
+          <details className="group/program overflow-hidden rounded-2xl border border-[#D5C8A3] bg-white shadow-sm">
+            <summary className="flex cursor-pointer list-none items-center justify-between gap-4 p-5 text-[#0A2A3A] focus-visible:outline focus-visible:outline-2 focus-visible:-outline-offset-4 focus-visible:outline-[#806D38] md:p-6 [&::-webkit-details-marker]:hidden">
+              <span className="min-w-0">
+                <span className="block text-lg font-semibold">Полная программа и спикеры</span>
+                <span className="mt-1 block text-sm text-[#1A2A36]/70 group-open/program:hidden">Показать программу 2 октября 2026 года</span>
+                <span className="mt-1 hidden text-sm text-[#1A2A36]/70 group-open/program:block">Свернуть программу</span>
+              </span>
+              <ChevronDown className="h-6 w-6 shrink-0 text-[#806D38] transition-transform group-open/program:rotate-180" aria-hidden="true" />
+            </summary>
+            <div className="border-t border-[#E9E1CF]">
+              <div className="px-4 pt-6 md:px-6">
+                <h3 className="mb-4 text-lg font-semibold text-[#0A2A3A]">Научные направления 2026</h3>
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+                  {programs.map((program) => (
+                    <ProgramCard key={program.title} icon={program.icon} title={program.title} description={program.description} />
+                  ))}
+                </div>
+              </div>
+              <ConferenceSchedule />
+            </div>
+          </details>
         </div>
       </section>
-
-      <ConferenceSchedule />
 
       {/* Who Should Participate */}
       <section className="relative overflow-hidden py-16 px-4 bg-white">
@@ -272,7 +290,7 @@ function HomePage() {
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-[1.05fr_0.95fr]">
             <div>
-              <h2 className="text-3xl md:text-4xl mb-5 text-[#0A2A3A]">Мастер-класс</h2>
+              <h2 className="text-3xl md:text-4xl mb-5 text-[#0A2A3A]">Мастер-класс 2026</h2>
               <div className="mb-7 max-w-2xl space-y-4 text-base leading-relaxed text-[#1A2A36]/78 md:text-lg">
                 <p>
                   Практический мастер-класс по структуризации патологоанатомических заключений в
@@ -308,7 +326,7 @@ function HomePage() {
       {/* Organizers */}
       <section id="organizers" className="py-16 px-4 bg-white">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl md:text-4xl text-center mb-12 text-[#0A2A3A]">Организаторы и партнёры</h2>
+          <h2 className="text-3xl md:text-4xl text-center mb-12 text-[#0A2A3A]">Организаторы и партнёры форума 2026</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
             <div className="rounded-lg border border-[#E2E8F0] bg-[#F8F9FA] p-6">
@@ -380,7 +398,7 @@ function HomePage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
             <div className="rounded-lg bg-white/88 p-5 shadow-sm backdrop-blur-sm">
-              <h3 className="text-xl mb-4 text-[#0A2A3A]">Место проведения:</h3>
+              <h3 className="text-xl mb-4 text-[#0A2A3A]">Место проведения форума 2026:</h3>
               <div className="space-y-2 text-[#1A2A36] mb-6">
                 <p>Отель «Ренартисс Исаакий Санкт-Петербург 5* »</p>
                 <p>190121, Россия, Санкт-Петербург, Почтамтская, 4</p>
@@ -399,7 +417,7 @@ function HomePage() {
 ></iframe>
 
               <p className="mt-4 text-sm text-[#1A2A36]/80">
-                <strong>______</strong> ______
+                Площадку форума 2027 года сообщим дополнительно.
               </p>
             </div>
 
@@ -439,18 +457,48 @@ function HomePage() {
             {' | '}
             <a href="#" className="hover:underline">Использование cookies</a>
           </p>
-          <p>© 2026 Петербургский морфологический форум</p>
+          <p>© 2026–2027 Петербургский морфологический форум</p>
         </div>
       </footer>
     </div>
   );
 }
 
+function ConferenceMaterials() {
+  const materials = [
+    { href: 'https://vk.ru/album-242283415_312247668', title: 'Фотографии', description: 'Моменты форума, участники и спикеры.', action: 'Открыть фотоальбом', icon: Images },
+    { href: 'https://vkvideo.ru/@club242283415', title: 'Видеозаписи', description: 'Смотрите записи докладов конференции.', action: 'Смотреть в ВК Видео', icon: Video },
+    { href: 'https://vk.ru/club242283415', title: 'Группа ВКонтакте', description: 'Новости сообщества и следующего форума.', action: 'Перейти в группу', icon: Users },
+  ];
+
+  return (
+    <section id="materials" className="scroll-mt-6 border-b border-[#E9E1CF] bg-[#F5F0E4] px-4 py-10 md:py-12">
+      <div className="mx-auto max-w-6xl">
+        <p className="mb-2 text-center text-sm font-semibold uppercase tracking-[0.14em] text-[#806D38]">Спасибо, что были с нами</p>
+        <h2 className="mb-3 text-center text-2xl text-[#0A2A3A] md:text-3xl">Материалы форума 2026</h2>
+        <p className="mx-auto mb-7 max-w-2xl text-center leading-relaxed text-[#1A2A36]/75">Сохраняем главное и продолжаем общение — фотографии, видео и новости в одном месте.</p>
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+          {materials.map(({ href, title, description, action, icon: Icon }) => (
+            <a key={href} href={href} target="_blank" rel="noopener noreferrer" aria-label={`${action} (в новой вкладке)`} className="group flex min-w-0 flex-col rounded-xl border border-[#E1D7BE] bg-white p-5 text-[#0A2A3A] shadow-sm transition hover:-translate-y-1 hover:border-[#B8A16A] hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#806D38] md:p-6">
+              <Icon className="mb-4 h-7 w-7 text-[#806D38]" aria-hidden="true" />
+              <h3 className="mb-2 text-xl font-semibold">{title}</h3>
+              <p className="mb-5 flex-1 text-sm leading-relaxed text-[#1A2A36]/75">{description}</p>
+              <span className="flex items-center justify-between gap-3 text-sm font-semibold text-[#806D38]">{action}<ArrowUpRight className="h-4 w-4 shrink-0" aria-hidden="true" /></span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function QuickNav() {
   const links = [
-    { href: '#forum-register', label: 'Форум', icon: Calendar },
+    { href: '#forum-register', label: 'Форум 2027', icon: Calendar },
+    { href: '#materials', label: 'Фото и видео', icon: Images },
+    { href: '#program-archive', label: 'Программа 2026', icon: BookOpenCheck },
     { href: '#feedback', label: 'Обратная связь', icon: MessageSquareText },
-    { href: '#masterclass', label: 'Мастер-класс', icon: BookOpenCheck },
+    { href: '#masterclass', label: 'Мастер-класс 2026', icon: GraduationCap },
     { href: '#faq', label: 'Вопросы', icon: HelpCircle },
     { href: '#contacts', label: 'Контакты', icon: MapPin },
   ];
